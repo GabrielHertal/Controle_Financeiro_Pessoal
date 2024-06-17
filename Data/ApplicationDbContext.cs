@@ -1,5 +1,6 @@
 ﻿using Controle_Financeiro_Pessoal.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Controle_Financeiro_Pessoal.Data
 {
@@ -21,6 +22,23 @@ namespace Controle_Financeiro_Pessoal.Data
             {
                 optionsBuilder.UseNpgsql("User Id=postgres.atfnoismzndhpzpynwes;Password=Coxinha@932012;Server=aws-0-sa-east-1.pooler.supabase.com;Port=6543;Database=postgres;");
             }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            foreach (var table in modelBuilder.Model.GetEntityTypes())
+            {
+                table.SetTableName(table.GetTableName().ToLower());
+
+                foreach (var prop in table.GetProperties())
+                {
+                    var name = (prop.GetColumnName(StoreObjectIdentifier.Table(table.Name, table.GetSchema())) ?? prop.Name).ToLower();
+                    prop.SetColumnName(name);
+                }
+            }
+
         }
     }
 }
