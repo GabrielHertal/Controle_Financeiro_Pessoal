@@ -1,6 +1,6 @@
 using Controle_Financeiro_Pessoal.Data;
+using Controle_Financeiro_Pessoal.View;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 namespace Controle_Financeiro_Pessoal
 {
     internal static class Program
@@ -8,8 +8,8 @@ namespace Controle_Financeiro_Pessoal
         [STAThread]
         static void Main()
         {
-            ApplicationConfiguration.Initialize();
-            Application.Run(new Fo_Principal());
+                ApplicationConfiguration.Initialize();
+                Application.Run(new Fo_Login());
         }
     }
 }
