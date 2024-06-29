@@ -29,17 +29,18 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
             panel_usuarios = new Panel();
             btn_excluir = new Button();
             grid_usuarios = new DataGridView();
+            c1UsuarioBindingSource = new BindingSource(components);
             c1IDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             c1NomeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             c1CpfDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             c1EmailDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             c1RendaMensalDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            c1UsuarioBindingSource = new BindingSource(components);
+            btn_adicionar = new Button();
             panel_usuarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)grid_usuarios).BeginInit();
             ((System.ComponentModel.ISupportInitialize)c1UsuarioBindingSource).BeginInit();
@@ -50,20 +51,21 @@
             panel_usuarios.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel_usuarios.AutoSize = true;
             panel_usuarios.BackColor = SystemColors.ControlDarkDark;
+            panel_usuarios.Controls.Add(btn_adicionar);
             panel_usuarios.Controls.Add(btn_excluir);
             panel_usuarios.Controls.Add(grid_usuarios);
             panel_usuarios.Location = new Point(-2, -4);
             panel_usuarios.Name = "panel_usuarios";
-            panel_usuarios.Size = new Size(1408, 808);
+            panel_usuarios.Size = new Size(1409, 811);
             panel_usuarios.TabIndex = 0;
             // 
             // btn_excluir
             // 
             btn_excluir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btn_excluir.Image = Properties.Resources.lixo;
-            btn_excluir.Location = new Point(1306, 16);
+            btn_excluir.Location = new Point(1326, 20);
             btn_excluir.Name = "btn_excluir";
-            btn_excluir.Size = new Size(68, 61);
+            btn_excluir.Size = new Size(70, 60);
             btn_excluir.TabIndex = 2;
             btn_excluir.UseVisualStyleBackColor = true;
             btn_excluir.Click += btn_excluir_Click;
@@ -76,38 +78,42 @@
             grid_usuarios.AutoGenerateColumns = false;
             grid_usuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             grid_usuarios.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.HotTrack;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            grid_usuarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.BackColor = SystemColors.Control;
+            dataGridViewCellStyle15.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            dataGridViewCellStyle15.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = SystemColors.HotTrack;
+            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
+            grid_usuarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
             grid_usuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             grid_usuarios.Columns.AddRange(new DataGridViewColumn[] { c1IDDataGridViewTextBoxColumn, c1NomeDataGridViewTextBoxColumn, c1CpfDataGridViewTextBoxColumn, c1EmailDataGridViewTextBoxColumn, c1RendaMensalDataGridViewTextBoxColumn });
             grid_usuarios.DataSource = c1UsuarioBindingSource;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = SystemColors.Window;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 10F);
-            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            grid_usuarios.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.BackColor = SystemColors.Window;
+            dataGridViewCellStyle16.Font = new Font("Segoe UI", 10F);
+            dataGridViewCellStyle16.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle16.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.False;
+            grid_usuarios.DefaultCellStyle = dataGridViewCellStyle16;
             grid_usuarios.Location = new Point(14, 83);
             grid_usuarios.MultiSelect = false;
             grid_usuarios.Name = "grid_usuarios";
             grid_usuarios.ReadOnly = true;
             grid_usuarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            grid_usuarios.Size = new Size(1379, 707);
+            grid_usuarios.Size = new Size(1380, 710);
             grid_usuarios.TabIndex = 1;
             grid_usuarios.CellMouseDoubleClick += grid_usuarios_CellMouseDoubleClick;
+            // 
+            // c1UsuarioBindingSource
+            // 
+            c1UsuarioBindingSource.DataSource = typeof(Model.C1Usuario);
             // 
             // c1IDDataGridViewTextBoxColumn
             // 
             c1IDDataGridViewTextBoxColumn.DataPropertyName = "C1ID";
-            c1IDDataGridViewTextBoxColumn.FillWeight = 3.690354F;
+            c1IDDataGridViewTextBoxColumn.FillWeight = 2.5F;
             c1IDDataGridViewTextBoxColumn.HeaderText = "ID";
             c1IDDataGridViewTextBoxColumn.Name = "c1IDDataGridViewTextBoxColumn";
             c1IDDataGridViewTextBoxColumn.ReadOnly = true;
@@ -144,16 +150,22 @@
             c1RendaMensalDataGridViewTextBoxColumn.Name = "c1RendaMensalDataGridViewTextBoxColumn";
             c1RendaMensalDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // c1UsuarioBindingSource
+            // btn_adicionar
             // 
-            c1UsuarioBindingSource.DataSource = typeof(Model.C1Usuario);
+            btn_adicionar.Image = Properties.Resources.mais;
+            btn_adicionar.Location = new Point(14, 20);
+            btn_adicionar.Name = "btn_adicionar";
+            btn_adicionar.Size = new Size(70, 60);
+            btn_adicionar.TabIndex = 3;
+            btn_adicionar.UseVisualStyleBackColor = true;
+            btn_adicionar.Click += btn_adicionar_Click;
             // 
             // Fo_Usuarios
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(1403, 798);
+            ClientSize = new Size(1404, 801);
             Controls.Add(panel_usuarios);
             MaximizeBox = false;
             Name = "Fo_Usuarios";
@@ -177,11 +189,12 @@
         public ListView lv_usuarios;
         private DataGridView grid_usuarios;
         private BindingSource c1UsuarioBindingSource;
+        private Button btn_excluir;
         private DataGridViewTextBoxColumn c1IDDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn c1NomeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn c1CpfDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn c1EmailDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn c1RendaMensalDataGridViewTextBoxColumn;
-        private Button btn_excluir;
+        private Button btn_adicionar;
     }
 }

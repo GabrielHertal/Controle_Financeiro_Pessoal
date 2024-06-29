@@ -28,27 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
+            panel_menu = new Panel();
+            btn_recebimentos = new Button();
             btn_usuarios = new Button();
             panel_principal = new Panel();
-            panel1.SuspendLayout();
+            panel_menu.SuspendLayout();
             SuspendLayout();
             // 
-            // panel1
+            // panel_menu
             // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            panel1.BackColor = SystemColors.AppWorkspace;
-            panel1.Controls.Add(btn_usuarios);
-            panel1.Location = new Point(-3, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(355, 816);
-            panel1.TabIndex = 0;
+            panel_menu.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            panel_menu.BackColor = SystemColors.AppWorkspace;
+            panel_menu.Controls.Add(btn_recebimentos);
+            panel_menu.Controls.Add(btn_usuarios);
+            panel_menu.Location = new Point(-3, 0);
+            panel_menu.Name = "panel_menu";
+            panel_menu.Size = new Size(355, 816);
+            panel_menu.TabIndex = 0;
+            // 
+            // btn_recebimentos
+            // 
+            btn_recebimentos.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btn_recebimentos.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btn_recebimentos.Location = new Point(15, 191);
+            btn_recebimentos.Name = "btn_recebimentos";
+            btn_recebimentos.Size = new Size(331, 72);
+            btn_recebimentos.TabIndex = 1;
+            btn_recebimentos.Text = "Recebimentos";
+            btn_recebimentos.UseVisualStyleBackColor = true;
+            btn_recebimentos.Click += btn_recebimentos_Click;
             // 
             // btn_usuarios
             // 
             btn_usuarios.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             btn_usuarios.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btn_usuarios.Location = new Point(15, 52);
+            btn_usuarios.Location = new Point(15, 92);
             btn_usuarios.Name = "btn_usuarios";
             btn_usuarios.Size = new Size(331, 72);
             btn_usuarios.TabIndex = 0;
@@ -72,21 +86,22 @@
             AutoSize = true;
             ClientSize = new Size(1393, 813);
             Controls.Add(panel_principal);
-            Controls.Add(panel1);
+            Controls.Add(panel_menu);
             MaximizeBox = false;
             Name = "Fo_Principal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Menu Principal";
             WindowState = FormWindowState.Maximized;
             FormClosed += Fo_Principal_FormClosed;
-            panel1.ResumeLayout(false);
+            panel_menu.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel panel1;
+        private Panel panel_menu;
         private Button btn_usuarios;
         public Panel panel_principal;
+        private Button btn_recebimentos;
     }
 }

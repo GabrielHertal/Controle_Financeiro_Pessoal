@@ -1,33 +1,33 @@
 ﻿using Controle_Financeiro_Pessoal.Data;
 using Controle_Financeiro_Pessoal.Model;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace Controle_Financeiro_Pessoal.Controller
 {
     public class C1UsuarioController
     {
         private readonly ApplicationDbContext _Context;
+        public bool visualizauserinativo;
         public C1UsuarioController() => _Context = new ApplicationDbContext(options: new DbContextOptionsBuilder<ApplicationDbContext>()
             .Options);
 
-        public void AdicionarUsuário(C1Usuario C1usuario)
+        public async void AdicionarUsuário(C1Usuario C1usuario)
         {
             _Context.C1Usuario.Add(C1usuario);
-            _Context.SaveChanges();
+            await _Context.SaveChangesAsync();
         }
-        public int VerificarExistenciaCadastro(string email, string senha) 
-            => _Context.C1Usuario.Count(u => u.C1Email == email && u.C1Senha == senha);
+        public int VerificarExistenciaCadastro(string email, string senha)
+            => _Context.C1Usuario.Where(c => c.C1Ativo == true).Count(u => u.C1Email == email && u.C1Senha == senha);
 
         public async Task<List<C1Usuario>> ListarC1Usuario()
         {
-            return await _Context.C1Usuario.OrderBy(C1Usuario => C1Usuario.C1ID).ToListAsync();
+            return await _Context.C1Usuario.Where(c => c.C1Ativo == true || c.C1Ativo == visualizauserinativo).OrderBy(C1Usuario => C1Usuario.C1ID).ToListAsync();
         }
         public async Task<C1Usuario> ObtemC1Usuario(int id)
         {
             return await _Context.C1Usuario.Where(c => c.C1ID == id).FirstOrDefaultAsync();
         }
-        public async void AtualizarC1Usuario(int id,C1Usuario C1usuario)
+        public async void AtualizarC1Usuario(int id, C1Usuario C1usuario)
         {
             C1Usuario userupdate = await _Context.C1Usuario.Where(c => c.C1ID == id).FirstOrDefaultAsync();
             if (userupdate != null)
@@ -40,7 +40,7 @@ namespace Controle_Financeiro_Pessoal.Controller
             }
             else
             {
-                MessageBox.Show("Falla ao atualizar usuário!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Falha ao atualizar usuário!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public async void DeletarC1Usuario(int id)

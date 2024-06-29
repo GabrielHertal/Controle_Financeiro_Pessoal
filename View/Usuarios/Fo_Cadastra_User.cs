@@ -8,18 +8,20 @@ namespace Controle_Financeiro_Pessoal.View
     {
         private readonly C1UsuarioController _c1usuariocontroller;
         Fo_Login _fo_login = new Fo_Login();
-        private int id;
+        private int _id;
         private bool _editar;
-        public Fo_Cadastra_User(C1UsuarioController _c1usuariocontroller, int id = 0, bool _editar = false)
+        private bool _cadastrarnovo;
+        public Fo_Cadastra_User(C1UsuarioController _c1usuariocontroller, int _id = 0, bool _editar = false, bool _cadastranovo = false)
         {
             this._c1usuariocontroller = _c1usuariocontroller;
             this._editar = _editar;
-            this.id = id;
+            this._id = _id;
+            this._cadastrarnovo = _cadastranovo;
             InitializeComponent();
             if (_editar == true)
             {
                 btn_Cadastrar.Text = "Atualizar";
-                PreencheCamposEditaUser(id);
+                PreencheCamposEditaUser(_id);
             }
         }
         DateTime _dataatual = DateTime.UtcNow;
@@ -60,13 +62,17 @@ namespace Controle_Financeiro_Pessoal.View
             {
                 _c1usuariocontroller.AdicionarUsuário(usuario);
                 MessageBox.Show("Usuário criado com sucesso!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult = DialogResult.OK;
                 this.Hide();
-                var fo_login = new Fo_Login();
-                fo_login.Show();
+                if (_cadastrarnovo == false)
+                {
+                    var fo_login = new Fo_Login();
+                    fo_login.Show();
+                }
             }
             else
             {
-                _c1usuariocontroller.AtualizarC1Usuario(id, usuario);
+                _c1usuariocontroller.AtualizarC1Usuario(_id, usuario);
                 MessageBox.Show("Usuário editado com sucesso!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
                 this.Hide();
@@ -82,7 +88,8 @@ namespace Controle_Financeiro_Pessoal.View
             {
                 this.Hide();
             }
-;       }
+;
+        }
         private async void PreencheCamposEditaUser(int id)
         {
             C1Usuario _c1usuario = await _c1usuariocontroller.ObtemC1Usuario(id);
@@ -92,7 +99,7 @@ namespace Controle_Financeiro_Pessoal.View
             txt_confirm_senha.Text = _c1usuario.C1Senha;
             txt_renda.Text = _c1usuario.C1Renda_Mensal.ToString();
             mastxt_cpf.Text = _c1usuario.C1Cpf;
-            _dataatual= _c1usuario.C1Data_Criacao;
+            _dataatual = _c1usuario.C1Data_Criacao;
         }
     }
 }

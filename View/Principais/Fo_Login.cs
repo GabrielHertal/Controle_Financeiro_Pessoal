@@ -27,7 +27,7 @@ namespace Controle_Financeiro_Pessoal.View
             string _senha = txt_senha.Text;
             if (c1usuariocontroller.VerificarExistenciaCadastro(_email, _senha) <= 0)
             {
-                MessageBox.Show("Usuario inexistente no Sistema, verifique!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Usuario inexistente ou inativado, verifique!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txt_email.Clear();
                 txt_senha.Clear();
                 return;

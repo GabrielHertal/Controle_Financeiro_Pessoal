@@ -34,8 +34,8 @@
             btn_entrar = new Button();
             linklbl_cadastrar = new LinkLabel();
             label2 = new Label();
-            panel1 = new Panel();
-            panel1.SuspendLayout();
+            panel_login = new Panel();
+            panel_login.SuspendLayout();
             SuspendLayout();
             // 
             // txt_email
@@ -93,34 +93,34 @@
             label2.TabIndex = 5;
             label2.Text = "Senha";
             // 
-            // panel1
+            // panel_login
             // 
-            panel1.BackColor = SystemColors.AppWorkspace;
-            panel1.Controls.Add(txt_senha);
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(txt_email);
-            panel1.Controls.Add(linklbl_cadastrar);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(btn_entrar);
-            panel1.Location = new Point(-3, -2);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(411, 156);
-            panel1.TabIndex = 6;
+            panel_login.BackColor = SystemColors.AppWorkspace;
+            panel_login.Controls.Add(txt_senha);
+            panel_login.Controls.Add(label2);
+            panel_login.Controls.Add(txt_email);
+            panel_login.Controls.Add(linklbl_cadastrar);
+            panel_login.Controls.Add(label1);
+            panel_login.Controls.Add(btn_entrar);
+            panel_login.Location = new Point(-3, -2);
+            panel_login.Name = "panel_login";
+            panel_login.Size = new Size(411, 156);
+            panel_login.TabIndex = 6;
             // 
             // Fo_Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(403, 153);
-            Controls.Add(panel1);
+            Controls.Add(panel_login);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             MaximizeBox = false;
             Name = "Fo_Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
             FormClosed += Fo_Login_FormClosed;
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            panel_login.ResumeLayout(false);
+            panel_login.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -132,6 +132,6 @@
         private Button btn_entrar;
         private LinkLabel linklbl_cadastrar;
         private Label label2;
-        private Panel panel1;
+        private Panel panel_login;
     }
 }

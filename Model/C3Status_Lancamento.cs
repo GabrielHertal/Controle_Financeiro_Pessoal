@@ -11,6 +11,6 @@ namespace Controle_Financeiro_Pessoal.Model
     {
         [Key]
         public required int C3ID { get; set; }
-        public required string C3Noem_Status { get; set; }
+        public required string C3Nome_Status { get; set; }
     }
 }

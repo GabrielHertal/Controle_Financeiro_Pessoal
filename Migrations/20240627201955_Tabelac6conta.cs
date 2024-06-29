@@ -15,8 +15,7 @@ namespace Controle_Financeiro_Pessoal.Migrations
                 name: "C2FKC6ID_Conta",
                 table: "C2Lancamentos",
                 type: "integer",
-                nullable: false,
-                defaultValue: 0);
+                nullable: false);
 
             migrationBuilder.CreateTable(
                 name: "C6Contas",

@@ -11,11 +11,12 @@ namespace Controle_Financeiro_Pessoal.Data
         {
         }
         public DbSet<C1Usuario> C1Usuario { get; set; }
-        public DbSet<C2Lancamentos> C2Lancamentos { get; set; }
+        public DbSet<C2Lancamento> C2Lancamento { get; set; }
         public DbSet<C3Status_Lancamento> C3Status_Lancamento { get; set; }
         public DbSet<C4Moeda> C4Moeda { get; set; }
         public DbSet<C5Tipo_Lancamento> C5Tipo_Lancamento { get; set; }
-        public DbSet<C6Conta> C6Contas { get; set; }
+        public DbSet<C6Conta> C6Conta { get; set; }
+        public DbSet<C7Recebimento> C7Recebimento { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
