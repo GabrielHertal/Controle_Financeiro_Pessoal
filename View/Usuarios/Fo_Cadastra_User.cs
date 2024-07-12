@@ -1,22 +1,19 @@
 ﻿using Controle_Financeiro_Pessoal.Controller;
 using Controle_Financeiro_Pessoal.Model;
-using System.Drawing.Text;
 
 namespace Controle_Financeiro_Pessoal.View
 {
     public partial class Fo_Cadastra_User : Form
     {
         private readonly C1UsuarioController _c1usuariocontroller;
-        Fo_Login _fo_login = new Fo_Login();
+        Fo_Login _fo_login = new(new C1UsuarioController());
         private int _id;
-        private bool _editar;
-        private bool _cadastrarnovo;
-        public Fo_Cadastra_User(C1UsuarioController _c1usuariocontroller, int _id = 0, bool _editar = false, bool _cadastranovo = false)
+        private bool _editar = false;
+        public Fo_Cadastra_User(C1UsuarioController _c1usuariocontroller, int _id = 0, bool _editar = false)
         {
             this._c1usuariocontroller = _c1usuariocontroller;
             this._editar = _editar;
             this._id = _id;
-            this._cadastrarnovo = _cadastranovo;
             InitializeComponent();
             if (_editar == true)
             {
@@ -64,11 +61,7 @@ namespace Controle_Financeiro_Pessoal.View
                 MessageBox.Show("Usuário criado com sucesso!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
                 this.Hide();
-                if (_cadastrarnovo == false)
-                {
-                    var fo_login = new Fo_Login();
-                    fo_login.Show();
-                }
+                _fo_login.Show();
             }
             else
             {
@@ -83,12 +76,8 @@ namespace Controle_Financeiro_Pessoal.View
             if (_editar == false)
             {
                 _fo_login.Show();
+
             }
-            else
-            {
-                this.Hide();
-            }
-;
         }
         private async void PreencheCamposEditaUser(int id)
         {

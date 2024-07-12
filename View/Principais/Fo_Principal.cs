@@ -1,15 +1,16 @@
 using Controle_Financeiro_Pessoal.Controller;
-using Controle_Financeiro_Pessoal.Data;
 using Controle_Financeiro_Pessoal.View;
-using Controle_Financeiro_Pessoal.View.Recebimento;
-using System.DirectoryServices.ActiveDirectory;
+using Controle_Financeiro_Pessoal.View.Financeiro;
+using Controle_Financeiro_Pessoal.View.Lancamentos;
 
 namespace Controle_Financeiro_Pessoal
 {
     public partial class Fo_Principal : Form
     {
-        public Fo_Principal()
+        private readonly C1UsuarioController _c1usuariocontroller;
+        public Fo_Principal(C1UsuarioController c1UsuarioController)
         {
+            _c1usuariocontroller = c1UsuarioController;
             InitializeComponent();
         }
         #region Função que faz um formulário abrir dentro de outro
@@ -30,20 +31,25 @@ namespace Controle_Financeiro_Pessoal
             currentForm.Show();
         }
         #endregion
-        private readonly ApplicationDbContext context;
         private void btn_usuarios_Click(object sender, EventArgs e)
         {
             C1UsuarioController c1usuariocontroller = new C1UsuarioController();
             OpenChildForm(new Fo_Usuarios(c1usuariocontroller));
         }
+        private void btn_contas_Click(object sender, EventArgs e)
+        {
+            C6ContaController c6ContaController = new C6ContaController();
+            OpenChildForm(new Fo_Contas(c6ContaController, _c1usuariocontroller.usuariologado));
+        }
+        private void btn_lancamentos_Click(object sender, EventArgs e)
+        {
+            C2LancamentoController c2lancamentocontroller = new C2LancamentoController();
+            C6ContaController c6Contacontroller = new C6ContaController();
+            OpenChildForm(new Fo_Lancamentos(_c1usuariocontroller.usuariologado, c2lancamentocontroller, c6Contacontroller));
+        }
         private void Fo_Principal_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
-        }
-        private void btn_recebimentos_Click(object sender, EventArgs e)
-        {
-            C7RecebimentoController c7recebimentocontroller = new C7RecebimentoController();
-            OpenChildForm(new Fo_Recebimento(c7recebimentocontroller));
         }
     }
 }

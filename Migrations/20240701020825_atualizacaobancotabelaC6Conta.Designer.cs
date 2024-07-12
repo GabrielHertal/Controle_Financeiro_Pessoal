@@ -3,6 +3,7 @@ using System;
 using Controle_Financeiro_Pessoal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Controle_Financeiro_Pessoal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240701020825_atualizacaobancotabelaC6Conta")]
+    partial class atualizacaobancotabelaC6Conta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,10 +110,6 @@ namespace Controle_Financeiro_Pessoal.Migrations
                     b.Property<int>("C2FKC6ID_Conta")
                         .HasColumnType("integer")
                         .HasColumnName("C2FKC6ID_Conta");
-
-                    b.Property<string>("C2Observacao")
-                        .HasColumnType("text")
-                        .HasColumnName("C2Observacao");
 
                     b.Property<string>("C2Titulo_Lancamento")
                         .IsRequired()
@@ -219,6 +218,10 @@ namespace Controle_Financeiro_Pessoal.Migrations
                         .HasColumnType("text")
                         .HasColumnName("C6Nome");
 
+                    b.Property<float?>("C6Saldo")
+                        .HasColumnType("real")
+                        .HasColumnName("C6Saldo");
+
                     b.Property<int>("C6Tipo_Conta")
                         .HasColumnType("integer")
                         .HasColumnName("C6Tipo_Conta");
@@ -228,6 +231,45 @@ namespace Controle_Financeiro_Pessoal.Migrations
                     b.HasIndex("C6FKC1ID_User");
 
                     b.ToTable("C6Conta");
+                });
+
+            modelBuilder.Entity("Controle_Financeiro_Pessoal.Model.C7Recebimento", b =>
+                {
+                    b.Property<int>("C7ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("C7ID");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("C7ID"));
+
+                    b.Property<DateTime>("C7Data_Recebimento")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("C7Data_Recebimento");
+
+                    b.Property<int>("C7FKC1ID_Usuario")
+                        .HasColumnType("integer")
+                        .HasColumnName("C7FKC1ID_Usuario");
+
+                    b.Property<int>("C7FKC6ID_Conta")
+                        .HasColumnType("integer")
+                        .HasColumnName("C7FKC6ID_Conta");
+
+                    b.Property<string>("C7Titulo_Recebimento")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("C7Titulo_Recebimento");
+
+                    b.Property<float>("C7Valor_Recebimento")
+                        .HasColumnType("real")
+                        .HasColumnName("C7Valor_Recebimento");
+
+                    b.HasKey("C7ID");
+
+                    b.HasIndex("C7FKC1ID_Usuario");
+
+                    b.HasIndex("C7FKC6ID_Conta");
+
+                    b.ToTable("C7Recebimento");
                 });
 
             modelBuilder.Entity("Controle_Financeiro_Pessoal.Model.C2Lancamento", b =>
@@ -282,6 +324,25 @@ namespace Controle_Financeiro_Pessoal.Migrations
                         .IsRequired();
 
                     b.Navigation("C1Usuario");
+                });
+
+            modelBuilder.Entity("Controle_Financeiro_Pessoal.Model.C7Recebimento", b =>
+                {
+                    b.HasOne("Controle_Financeiro_Pessoal.Model.C1Usuario", "C1Usuario")
+                        .WithMany()
+                        .HasForeignKey("C7FKC1ID_Usuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Controle_Financeiro_Pessoal.Model.C6Conta", "C6Conta")
+                        .WithMany()
+                        .HasForeignKey("C7FKC6ID_Conta")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("C1Usuario");
+
+                    b.Navigation("C6Conta");
                 });
 #pragma warning restore 612, 618
         }

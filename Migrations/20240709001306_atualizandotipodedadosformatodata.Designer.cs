@@ -3,6 +3,7 @@ using System;
 using Controle_Financeiro_Pessoal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Controle_Financeiro_Pessoal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240709001306_atualizandotipodedadosformatodata")]
+    partial class atualizandotipodedadosformatodata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +43,7 @@ namespace Controle_Financeiro_Pessoal.Migrations
                         .HasColumnName("C1Cpf");
 
                     b.Property<DateTime>("C1Data_Criacao")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp")
                         .HasColumnName("C1Data_Criacao");
 
                     b.Property<string>("C1Email")
@@ -77,15 +80,15 @@ namespace Controle_Financeiro_Pessoal.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("C2ID"));
 
                     b.Property<DateTime>("C2Data_Lancamento")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp")
                         .HasColumnName("C2Data_Lancamento");
 
                     b.Property<DateTime?>("C2Data_Pagamento")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp")
                         .HasColumnName("C2Data_Pagamento");
 
                     b.Property<DateTime>("C2Data_Previa_Pagamento")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp")
                         .HasColumnName("C2Data_Previa_Pagamento");
 
                     b.Property<int>("C2FKC1ID_User")
@@ -207,7 +210,7 @@ namespace Controle_Financeiro_Pessoal.Migrations
                         .HasColumnName("C6Ativo");
 
                     b.Property<DateTime>("C6Data_Criacao")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp")
                         .HasColumnName("C6Data_Criacao");
 
                     b.Property<int>("C6FKC1ID_User")

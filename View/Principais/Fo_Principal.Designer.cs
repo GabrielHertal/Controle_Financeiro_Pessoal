@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             panel_menu = new Panel();
-            btn_recebimentos = new Button();
+            btn_lancamentos = new Button();
+            btn_contas = new Button();
             btn_usuarios = new Button();
             panel_principal = new Panel();
             panel_menu.SuspendLayout();
@@ -39,30 +40,42 @@
             // 
             panel_menu.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             panel_menu.BackColor = SystemColors.AppWorkspace;
-            panel_menu.Controls.Add(btn_recebimentos);
+            panel_menu.Controls.Add(btn_lancamentos);
+            panel_menu.Controls.Add(btn_contas);
             panel_menu.Controls.Add(btn_usuarios);
             panel_menu.Location = new Point(-3, 0);
             panel_menu.Name = "panel_menu";
             panel_menu.Size = new Size(355, 816);
             panel_menu.TabIndex = 0;
             // 
-            // btn_recebimentos
+            // btn_lancamentos
             // 
-            btn_recebimentos.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            btn_recebimentos.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btn_recebimentos.Location = new Point(15, 191);
-            btn_recebimentos.Name = "btn_recebimentos";
-            btn_recebimentos.Size = new Size(331, 72);
-            btn_recebimentos.TabIndex = 1;
-            btn_recebimentos.Text = "Recebimentos";
-            btn_recebimentos.UseVisualStyleBackColor = true;
-            btn_recebimentos.Click += btn_recebimentos_Click;
+            btn_lancamentos.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btn_lancamentos.Location = new Point(15, 124);
+            btn_lancamentos.Name = "btn_lancamentos";
+            btn_lancamentos.Size = new Size(331, 72);
+            btn_lancamentos.TabIndex = 3;
+            btn_lancamentos.Text = "Lançamentos";
+            btn_lancamentos.UseVisualStyleBackColor = true;
+            btn_lancamentos.Click += btn_lancamentos_Click;
+            // 
+            // btn_contas
+            // 
+            btn_contas.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btn_contas.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btn_contas.Location = new Point(15, 280);
+            btn_contas.Name = "btn_contas";
+            btn_contas.Size = new Size(331, 72);
+            btn_contas.TabIndex = 2;
+            btn_contas.Text = "Contas";
+            btn_contas.UseVisualStyleBackColor = true;
+            btn_contas.Click += btn_contas_Click;
             // 
             // btn_usuarios
             // 
             btn_usuarios.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             btn_usuarios.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btn_usuarios.Location = new Point(15, 92);
+            btn_usuarios.Location = new Point(15, 202);
             btn_usuarios.Name = "btn_usuarios";
             btn_usuarios.Size = new Size(331, 72);
             btn_usuarios.TabIndex = 0;
@@ -102,6 +115,7 @@
         private Panel panel_menu;
         private Button btn_usuarios;
         public Panel panel_principal;
-        private Button btn_recebimentos;
+        private Button btn_contas;
+        private Button btn_lancamentos;
     }
 }

@@ -40,33 +40,35 @@
             // 
             // txt_email
             // 
-            txt_email.Location = new Point(96, 32);
+            txt_email.Location = new Point(94, 29);
             txt_email.Name = "txt_email";
-            txt_email.Size = new Size(252, 23);
+            txt_email.Size = new Size(284, 23);
             txt_email.TabIndex = 0;
             // 
             // txt_senha
             // 
-            txt_senha.Location = new Point(96, 73);
+            txt_senha.Location = new Point(94, 74);
             txt_senha.Name = "txt_senha";
             txt_senha.PasswordChar = '*';
-            txt_senha.Size = new Size(252, 23);
+            txt_senha.Size = new Size(284, 23);
             txt_senha.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(52, 35);
+            label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label1.Location = new Point(27, 30);
             label1.Name = "label1";
-            label1.Size = new Size(41, 15);
+            label1.Size = new Size(61, 19);
             label1.TabIndex = 2;
-            label1.Text = "E-mail";
+            label1.Text = "E-mail -";
             // 
             // btn_entrar
             // 
-            btn_entrar.Location = new Point(235, 102);
+            btn_entrar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btn_entrar.Location = new Point(265, 103);
             btn_entrar.Name = "btn_entrar";
-            btn_entrar.Size = new Size(113, 23);
+            btn_entrar.Size = new Size(113, 30);
             btn_entrar.TabIndex = 2;
             btn_entrar.Text = "Entrar";
             btn_entrar.UseVisualStyleBackColor = true;
@@ -75,10 +77,10 @@
             // linklbl_cadastrar
             // 
             linklbl_cadastrar.AutoSize = true;
-            linklbl_cadastrar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            linklbl_cadastrar.Location = new Point(96, 102);
+            linklbl_cadastrar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            linklbl_cadastrar.Location = new Point(94, 103);
             linklbl_cadastrar.Name = "linklbl_cadastrar";
-            linklbl_cadastrar.Size = new Size(133, 15);
+            linklbl_cadastrar.Size = new Size(165, 19);
             linklbl_cadastrar.TabIndex = 3;
             linklbl_cadastrar.TabStop = true;
             linklbl_cadastrar.Text = "Cadastrar novo usuário";
@@ -87,15 +89,16 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(52, 76);
+            label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label2.Location = new Point(27, 75);
             label2.Name = "label2";
-            label2.Size = new Size(39, 15);
+            label2.Size = new Size(63, 19);
             label2.TabIndex = 5;
-            label2.Text = "Senha";
+            label2.Text = "Senha - ";
             // 
             // panel_login
             // 
-            panel_login.BackColor = SystemColors.AppWorkspace;
+            panel_login.BackColor = SystemColors.ControlDark;
             panel_login.Controls.Add(txt_senha);
             panel_login.Controls.Add(label2);
             panel_login.Controls.Add(txt_email);

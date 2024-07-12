@@ -6,7 +6,6 @@ namespace Controle_Financeiro_Pessoal.View
     {
         private readonly C1UsuarioController _c1usuariocontroller;
         public bool _editar;
-        public bool _cadastrarnovo;
         public Fo_Usuarios(C1UsuarioController c1usuariocontroller)
         {
             _c1usuariocontroller = c1usuariocontroller;
@@ -28,7 +27,6 @@ namespace Controle_Financeiro_Pessoal.View
             int _linha = grid_usuarios.SelectedCells[0].RowIndex;
             int _id = (int)grid_usuarios.Rows[_linha].Cells[0].Value;
             var fo_Cadastra_User = new Fo_Cadastra_User(_c1usuariocontroller, _id, _editar);
-            this.Hide();
             DialogResult result = fo_Cadastra_User.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -45,15 +43,12 @@ namespace Controle_Financeiro_Pessoal.View
             MessageBox.Show("Usuário inativado com sucesso!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             grid_usuarios.DataSource = _c1usuariocontroller.ListarC1Usuario();
         }
-
         private async void btn_adicionar_Click(object sender, EventArgs e)
         {
-            _cadastrarnovo = true;
-            Fo_Cadastra_User fo_cadastrauser = new Fo_Cadastra_User(_c1usuariocontroller,0,false,_cadastrarnovo);
+            Fo_Cadastra_User fo_cadastrauser = new Fo_Cadastra_User(_c1usuariocontroller,0,false);
             DialogResult result =  fo_cadastrauser.ShowDialog();
             if (result == DialogResult.OK)
             {
-                _cadastrarnovo = false;
                 grid_usuarios.DataSource = await _c1usuariocontroller.ListarC1Usuario(); 
             }
         }

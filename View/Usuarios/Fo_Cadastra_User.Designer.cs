@@ -52,7 +52,7 @@
             // 
             // txt_nome
             // 
-            txt_nome.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            txt_nome.Font = new Font("Segoe UI", 10F);
             txt_nome.Location = new Point(139, 34);
             txt_nome.Name = "txt_nome";
             txt_nome.Size = new Size(228, 25);
@@ -91,7 +91,7 @@
             // 
             // txt_email
             // 
-            txt_email.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            txt_email.Font = new Font("Segoe UI", 10F);
             txt_email.Location = new Point(139, 68);
             txt_email.Name = "txt_email";
             txt_email.Size = new Size(228, 25);
@@ -185,7 +185,7 @@
             // 
             // txt_renda
             // 
-            txt_renda.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            txt_renda.Font = new Font("Segoe UI", 10F);
             txt_renda.Location = new Point(139, 137);
             txt_renda.Name = "txt_renda";
             txt_renda.Size = new Size(228, 25);
@@ -203,7 +203,7 @@
             // 
             // txt_senha
             // 
-            txt_senha.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            txt_senha.Font = new Font("Segoe UI", 10F);
             txt_senha.Location = new Point(139, 169);
             txt_senha.Name = "txt_senha";
             txt_senha.PasswordChar = '*';
@@ -232,7 +232,7 @@
             // 
             // txt_confirm_senha
             // 
-            txt_confirm_senha.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            txt_confirm_senha.Font = new Font("Segoe UI", 10F);
             txt_confirm_senha.Location = new Point(139, 198);
             txt_confirm_senha.Name = "txt_confirm_senha";
             txt_confirm_senha.PasswordChar = '*';
@@ -251,7 +251,7 @@
             // 
             // mastxt_cpf
             // 
-            mastxt_cpf.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            mastxt_cpf.Font = new Font("Segoe UI", 10F);
             mastxt_cpf.Location = new Point(139, 104);
             mastxt_cpf.Mask = "000,000,000-00";
             mastxt_cpf.Name = "mastxt_cpf";

@@ -9,7 +9,7 @@ namespace Controle_Financeiro_Pessoal.Controller
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             var optionsbuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsbuilder.UseNpgsql("User Id=postgres;Password=Coxinha@932012;Server=db.svurdsjntoqabmebraeo.supabase.co;Port=5432;Database=postgres;");
+            optionsbuilder.UseNpgsql("User Id=postgres.svurdsjntoqabmebraeo;Password=Coxinha@932012;Server=aws-0-sa-east-1.pooler.supabase.com;Port=6543;Database=postgres;Pooling=false;");
             return new ApplicationDbContext(optionsbuilder.Options);
         }
     }

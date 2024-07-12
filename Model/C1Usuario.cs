@@ -7,7 +7,7 @@ namespace Controle_Financeiro_Pessoal.Model
     public class C1Usuario
     {
         [Key]
-        public int? C1ID { get; set; }
+        public int C1ID { get; set; }
         public required string C1Nome { get; set; }
         public string? C1Cpf { get; set; }
         public required string C1Email { get; set; }

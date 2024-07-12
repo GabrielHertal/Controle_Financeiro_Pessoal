@@ -16,11 +16,10 @@ namespace Controle_Financeiro_Pessoal.Data
         public DbSet<C4Moeda> C4Moeda { get; set; }
         public DbSet<C5Tipo_Lancamento> C5Tipo_Lancamento { get; set; }
         public DbSet<C6Conta> C6Conta { get; set; }
-        public DbSet<C7Recebimento> C7Recebimento { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseNpgsql("User Id=postgres;Password=Coxinha@932012;Server=db.svurdsjntoqabmebraeo.supabase.co;Port=5432;Database=postgres;");
+            optionsBuilder.UseNpgsql("User Id=postgres.svurdsjntoqabmebraeo;Password=Coxinha@932012;Server=aws-0-sa-east-1.pooler.supabase.com;Port=6543;Database=postgres;Pooling=false;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

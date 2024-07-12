@@ -6,6 +6,7 @@ namespace Controle_Financeiro_Pessoal.Controller
 {
     public class C1UsuarioController
     {
+        public int usuariologado { get; private set;}
         private readonly ApplicationDbContext _Context;
         public bool visualizauserinativo;
         public C1UsuarioController() => _Context = new ApplicationDbContext(options: new DbContextOptionsBuilder<ApplicationDbContext>()
@@ -18,7 +19,12 @@ namespace Controle_Financeiro_Pessoal.Controller
         }
         public int VerificarExistenciaCadastro(string email, string senha)
             => _Context.C1Usuario.Where(c => c.C1Ativo == true).Count(u => u.C1Email == email && u.C1Senha == senha);
-
+        public async Task <int> SalvarUsuarioConectado(string email, string senha)
+        {
+             usuariologado = await _Context.C1Usuario.Where(u => u.C1Email == email && u.C1Senha == senha)
+                .Select(u => u.C1ID).FirstOrDefaultAsync();
+            return usuariologado;
+        }
         public async Task<List<C1Usuario>> ListarC1Usuario()
         {
             return await _Context.C1Usuario.Where(c => c.C1Ativo == true || c.C1Ativo == visualizauserinativo).OrderBy(C1Usuario => C1Usuario.C1ID).ToListAsync();
