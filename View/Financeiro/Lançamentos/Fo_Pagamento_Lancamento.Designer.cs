@@ -1,6 +1,6 @@
 ﻿namespace Controle_Financeiro_Pessoal.View.Financeiro
 {
-    partial class Fo_Confirma_Pagamento
+    partial class Fo_Pagamento_Lancamento
     {
         /// <summary>
         /// Required designer variable.
@@ -28,42 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
+            panel1 = new Panel();
+            comboBox1 = new ComboBox();
             label1 = new Label();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
-            // textBox1
+            // panel1
             // 
-            textBox1.Location = new Point(12, 36);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(236, 23);
-            textBox1.TabIndex = 0;
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(comboBox1);
+            panel1.Location = new Point(-2, -5);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(427, 344);
+            panel1.TabIndex = 0;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(14, 33);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(393, 23);
+            comboBox1.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 18);
+            label1.Location = new Point(14, 15);
             label1.Name = "label1";
             label1.Size = new Size(38, 15);
             label1.TabIndex = 1;
             label1.Text = "label1";
             // 
-            // Fo_Confirma_Pagamento
+            // Fo_Pagamento_Lancamento
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(label1);
-            Controls.Add(textBox1);
-            Name = "Fo_Confirma_Pagamento";
-            Text = "Fo_Confirma_Pagamento";
+            ClientSize = new Size(417, 332);
+            Controls.Add(panel1);
+            Name = "Fo_Pagamento_Lancamento";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Pagamento Lançamento";
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private TextBox textBox1;
+        private Panel panel1;
         private Label label1;
+        private ComboBox comboBox1;
     }
 }

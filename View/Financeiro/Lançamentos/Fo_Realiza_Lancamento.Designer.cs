@@ -188,9 +188,9 @@
             label5.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label5.Location = new Point(362, 192);
             label5.Name = "label5";
-            label5.Size = new Size(52, 19);
+            label5.Size = new Size(149, 19);
             label5.TabIndex = 9;
-            label5.Text = "Conta:";
+            label5.Text = "Conta Utilizada Pag.:";
             // 
             // cbx_conta
             // 
@@ -222,7 +222,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label3.Location = new Point(12, 192);
+            label3.Location = new Point(14, 195);
             label3.Name = "label3";
             label3.Size = new Size(112, 19);
             label3.TabIndex = 6;
@@ -232,7 +232,7 @@
             // 
             dtp_prev_pagamento.Font = new Font("Segoe UI", 10F);
             dtp_prev_pagamento.Format = DateTimePickerFormat.Short;
-            dtp_prev_pagamento.Location = new Point(14, 214);
+            dtp_prev_pagamento.Location = new Point(14, 217);
             dtp_prev_pagamento.Name = "dtp_prev_pagamento";
             dtp_prev_pagamento.Size = new Size(165, 25);
             dtp_prev_pagamento.TabIndex = 5;
@@ -253,6 +253,7 @@
             txt_valor.Name = "txt_valor";
             txt_valor.Size = new Size(171, 25);
             txt_valor.TabIndex = 3;
+            txt_valor.Text = "0";
             txt_valor.TextChanged += txt_valor_TextChanged;
             // 
             // label2

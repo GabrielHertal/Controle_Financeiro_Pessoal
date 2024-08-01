@@ -9,9 +9,9 @@ namespace Controle_Financeiro_Pessoal
         [STAThread]
         static void Main()
         {
-                C1UsuarioController c1usuariocontroller = new C1UsuarioController();
-                ApplicationConfiguration.Initialize();
-                Application.Run(new Fo_Login(c1usuariocontroller));
+            C1UsuarioController c1usuariocontroller = new C1UsuarioController();
+            ApplicationConfiguration.Initialize();
+            Application.Run(new Fo_Login(c1usuariocontroller));
         }
     }
 }

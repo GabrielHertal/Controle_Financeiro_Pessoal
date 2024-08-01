@@ -100,7 +100,6 @@
             ClientSize = new Size(1393, 813);
             Controls.Add(panel_principal);
             Controls.Add(panel_menu);
-            MaximizeBox = false;
             Name = "Fo_Principal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Menu Principal";

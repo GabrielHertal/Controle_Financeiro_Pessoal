@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Controle_Financeiro_Pessoal.View.Financeiro
 {
-    public partial class Fo_Confirma_Pagamento : Form
+    public partial class Fo_Pagamento_Lancamento : Form
     {
-        public Fo_Confirma_Pagamento()
+        public Fo_Pagamento_Lancamento()
         {
             InitializeComponent();
         }

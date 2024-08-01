@@ -41,10 +41,13 @@
             c2DataLancamentoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             c2DataPrevPagDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             c2DataPagDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            c2FKC3StatusLancamentoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            C2FKC3Nome_Status_Lancamento = new DataGridViewTextBoxColumn();
             c2FKC4NomeMoedaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             c2FKC5TipoLancamentoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             c2FKC6NomeContaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            C2FKC5ID_Tipo_Lancamento = new DataGridViewTextBoxColumn();
+            C2FKC4Id_Moeda = new DataGridViewTextBoxColumn();
+            C2FKC3Id_Status_Lancamento = new DataGridViewTextBoxColumn();
             c2LancamentoDTOBindingSource = new BindingSource(components);
             panel_lancamentos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)grid_lancamentos).BeginInit();
@@ -60,18 +63,19 @@
             panel_lancamentos.Controls.Add(grid_lancamentos);
             panel_lancamentos.Location = new Point(-2, -2);
             panel_lancamentos.Name = "panel_lancamentos";
-            panel_lancamentos.Size = new Size(1411, 806);
+            panel_lancamentos.Size = new Size(1410, 805);
             panel_lancamentos.TabIndex = 0;
             // 
             // btn_excluir
             // 
             btn_excluir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btn_excluir.Image = Properties.Resources.lixo;
-            btn_excluir.Location = new Point(1324, 15);
+            btn_excluir.Location = new Point(1323, 15);
             btn_excluir.Name = "btn_excluir";
             btn_excluir.Size = new Size(70, 60);
             btn_excluir.TabIndex = 2;
             btn_excluir.UseVisualStyleBackColor = true;
+            btn_excluir.Click += btn_excluir_Click;
             // 
             // btn_novo_lancamento
             // 
@@ -90,7 +94,8 @@
             grid_lancamentos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             grid_lancamentos.AutoGenerateColumns = false;
             grid_lancamentos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.TopCenter;
+            grid_lancamentos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
@@ -99,7 +104,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             grid_lancamentos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             grid_lancamentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            grid_lancamentos.Columns.AddRange(new DataGridViewColumn[] { c2LancamentoIdDataGridViewTextBoxColumn, c2LancamentoNomeDataGridViewTextBoxColumn, c2LancamentoValorDataGridViewTextBoxColumn, c2DataLancamentoDataGridViewTextBoxColumn, c2DataPrevPagDataGridViewTextBoxColumn, c2DataPagDataGridViewTextBoxColumn, c2FKC3StatusLancamentoDataGridViewTextBoxColumn, c2FKC4NomeMoedaDataGridViewTextBoxColumn, c2FKC5TipoLancamentoDataGridViewTextBoxColumn, c2FKC6NomeContaDataGridViewTextBoxColumn });
+            grid_lancamentos.Columns.AddRange(new DataGridViewColumn[] { c2LancamentoIdDataGridViewTextBoxColumn, c2LancamentoNomeDataGridViewTextBoxColumn, c2LancamentoValorDataGridViewTextBoxColumn, c2DataLancamentoDataGridViewTextBoxColumn, c2DataPrevPagDataGridViewTextBoxColumn, c2DataPagDataGridViewTextBoxColumn, C2FKC3Nome_Status_Lancamento, c2FKC4NomeMoedaDataGridViewTextBoxColumn, c2FKC5TipoLancamentoDataGridViewTextBoxColumn, c2FKC6NomeContaDataGridViewTextBoxColumn, C2FKC5ID_Tipo_Lancamento, C2FKC4Id_Moeda, C2FKC3Id_Status_Lancamento });
             grid_lancamentos.DataSource = c2LancamentoDTOBindingSource;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
@@ -112,14 +117,15 @@
             grid_lancamentos.Location = new Point(14, 81);
             grid_lancamentos.Name = "grid_lancamentos";
             grid_lancamentos.ReadOnly = true;
-            grid_lancamentos.Size = new Size(1380, 710);
+            grid_lancamentos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grid_lancamentos.Size = new Size(1379, 709);
             grid_lancamentos.TabIndex = 0;
             grid_lancamentos.CellMouseDoubleClick += grid_lancamentos_CellMouseDoubleClick;
             // 
             // c2LancamentoIdDataGridViewTextBoxColumn
             // 
             c2LancamentoIdDataGridViewTextBoxColumn.DataPropertyName = "C2LancamentoId";
-            c2LancamentoIdDataGridViewTextBoxColumn.FillWeight = 35F;
+            c2LancamentoIdDataGridViewTextBoxColumn.FillWeight = 20F;
             c2LancamentoIdDataGridViewTextBoxColumn.HeaderText = "ID";
             c2LancamentoIdDataGridViewTextBoxColumn.Name = "c2LancamentoIdDataGridViewTextBoxColumn";
             c2LancamentoIdDataGridViewTextBoxColumn.ReadOnly = true;
@@ -127,6 +133,7 @@
             // c2LancamentoNomeDataGridViewTextBoxColumn
             // 
             c2LancamentoNomeDataGridViewTextBoxColumn.DataPropertyName = "C2LancamentoNome";
+            c2LancamentoNomeDataGridViewTextBoxColumn.FillWeight = 150F;
             c2LancamentoNomeDataGridViewTextBoxColumn.HeaderText = "TITULO LANCAMENTO";
             c2LancamentoNomeDataGridViewTextBoxColumn.Name = "c2LancamentoNomeDataGridViewTextBoxColumn";
             c2LancamentoNomeDataGridViewTextBoxColumn.ReadOnly = true;
@@ -134,7 +141,7 @@
             // c2LancamentoValorDataGridViewTextBoxColumn
             // 
             c2LancamentoValorDataGridViewTextBoxColumn.DataPropertyName = "C2LancamentoValor";
-            c2LancamentoValorDataGridViewTextBoxColumn.FillWeight = 70F;
+            c2LancamentoValorDataGridViewTextBoxColumn.FillWeight = 40F;
             c2LancamentoValorDataGridViewTextBoxColumn.HeaderText = "VALOR";
             c2LancamentoValorDataGridViewTextBoxColumn.Name = "c2LancamentoValorDataGridViewTextBoxColumn";
             c2LancamentoValorDataGridViewTextBoxColumn.ReadOnly = true;
@@ -163,18 +170,18 @@
             c2DataPagDataGridViewTextBoxColumn.Name = "c2DataPagDataGridViewTextBoxColumn";
             c2DataPagDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // c2FKC3StatusLancamentoDataGridViewTextBoxColumn
+            // C2FKC3Nome_Status_Lancamento
             // 
-            c2FKC3StatusLancamentoDataGridViewTextBoxColumn.DataPropertyName = "C2FKC3Status_Lancamento";
-            c2FKC3StatusLancamentoDataGridViewTextBoxColumn.FillWeight = 65F;
-            c2FKC3StatusLancamentoDataGridViewTextBoxColumn.HeaderText = "STATUS ";
-            c2FKC3StatusLancamentoDataGridViewTextBoxColumn.Name = "c2FKC3StatusLancamentoDataGridViewTextBoxColumn";
-            c2FKC3StatusLancamentoDataGridViewTextBoxColumn.ReadOnly = true;
+            C2FKC3Nome_Status_Lancamento.DataPropertyName = "C2FKC3Nome_Status_Lancamento";
+            C2FKC3Nome_Status_Lancamento.FillWeight = 50F;
+            C2FKC3Nome_Status_Lancamento.HeaderText = "STATUS";
+            C2FKC3Nome_Status_Lancamento.Name = "C2FKC3Nome_Status_Lancamento";
+            C2FKC3Nome_Status_Lancamento.ReadOnly = true;
             // 
             // c2FKC4NomeMoedaDataGridViewTextBoxColumn
             // 
             c2FKC4NomeMoedaDataGridViewTextBoxColumn.DataPropertyName = "C2FKC4Nome_Moeda";
-            c2FKC4NomeMoedaDataGridViewTextBoxColumn.FillWeight = 55F;
+            c2FKC4NomeMoedaDataGridViewTextBoxColumn.FillWeight = 50F;
             c2FKC4NomeMoedaDataGridViewTextBoxColumn.HeaderText = "MOEDA";
             c2FKC4NomeMoedaDataGridViewTextBoxColumn.Name = "c2FKC4NomeMoedaDataGridViewTextBoxColumn";
             c2FKC4NomeMoedaDataGridViewTextBoxColumn.ReadOnly = true;
@@ -182,7 +189,7 @@
             // c2FKC5TipoLancamentoDataGridViewTextBoxColumn
             // 
             c2FKC5TipoLancamentoDataGridViewTextBoxColumn.DataPropertyName = "C2FKC5Tipo_Lancamento";
-            c2FKC5TipoLancamentoDataGridViewTextBoxColumn.FillWeight = 45F;
+            c2FKC5TipoLancamentoDataGridViewTextBoxColumn.FillWeight = 40F;
             c2FKC5TipoLancamentoDataGridViewTextBoxColumn.HeaderText = "TIPO ";
             c2FKC5TipoLancamentoDataGridViewTextBoxColumn.Name = "c2FKC5TipoLancamentoDataGridViewTextBoxColumn";
             c2FKC5TipoLancamentoDataGridViewTextBoxColumn.ReadOnly = true;
@@ -190,10 +197,34 @@
             // c2FKC6NomeContaDataGridViewTextBoxColumn
             // 
             c2FKC6NomeContaDataGridViewTextBoxColumn.DataPropertyName = "C2FKC6Nome_Conta";
-            c2FKC6NomeContaDataGridViewTextBoxColumn.FillWeight = 78.23604F;
+            c2FKC6NomeContaDataGridViewTextBoxColumn.FillWeight = 80F;
             c2FKC6NomeContaDataGridViewTextBoxColumn.HeaderText = "CONTA";
             c2FKC6NomeContaDataGridViewTextBoxColumn.Name = "c2FKC6NomeContaDataGridViewTextBoxColumn";
             c2FKC6NomeContaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // C2FKC5ID_Tipo_Lancamento
+            // 
+            C2FKC5ID_Tipo_Lancamento.DataPropertyName = "C2FKC5ID_Tipo_Lancamento";
+            C2FKC5ID_Tipo_Lancamento.HeaderText = "Id_tipo_lanc";
+            C2FKC5ID_Tipo_Lancamento.Name = "C2FKC5ID_Tipo_Lancamento";
+            C2FKC5ID_Tipo_Lancamento.ReadOnly = true;
+            C2FKC5ID_Tipo_Lancamento.Visible = false;
+            // 
+            // C2FKC4Id_Moeda
+            // 
+            C2FKC4Id_Moeda.DataPropertyName = "C2FKC4Id_Moeda";
+            C2FKC4Id_Moeda.HeaderText = "Id_Moeda";
+            C2FKC4Id_Moeda.Name = "C2FKC4Id_Moeda";
+            C2FKC4Id_Moeda.ReadOnly = true;
+            C2FKC4Id_Moeda.Visible = false;
+            // 
+            // C2FKC3Id_Status_Lancamento
+            // 
+            C2FKC3Id_Status_Lancamento.DataPropertyName = "C2FKC3Id_Status_Lancamento";
+            C2FKC3Id_Status_Lancamento.HeaderText = "Id_status_lancamento";
+            C2FKC3Id_Status_Lancamento.Name = "C2FKC3Id_Status_Lancamento";
+            C2FKC3Id_Status_Lancamento.ReadOnly = true;
+            C2FKC3Id_Status_Lancamento.Visible = false;
             // 
             // c2LancamentoDTOBindingSource
             // 
@@ -218,7 +249,6 @@
         #endregion
 
         private Panel panel_lancamentos;
-        private DataGridView grid_lancamentos;
         private Button btn_excluir;
         private Button btn_novo_lancamento;
         private DataGridViewTextBoxColumn c2FKC3IDStatusDataGridViewTextBoxColumn;
@@ -231,15 +261,20 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private BindingSource c2LancamentoDTOBindingSource;
+        private DataGridViewTextBoxColumn c2FKC3StatusLancamentoDataGridViewTextBoxColumn;
+        public DataGridView grid_lancamentos;
         private DataGridViewTextBoxColumn c2LancamentoIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn c2LancamentoNomeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn c2LancamentoValorDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn c2DataLancamentoDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn c2DataPrevPagDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn c2DataPagDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn c2FKC3StatusLancamentoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn C2FKC3Nome_Status_Lancamento;
         private DataGridViewTextBoxColumn c2FKC4NomeMoedaDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn c2FKC5TipoLancamentoDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn c2FKC6NomeContaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn C2FKC5ID_Tipo_Lancamento;
+        private DataGridViewTextBoxColumn C2FKC4Id_Moeda;
+        private DataGridViewTextBoxColumn C2FKC3Id_Status_Lancamento;
     }
 }

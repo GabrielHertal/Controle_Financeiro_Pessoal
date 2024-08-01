@@ -7,7 +7,7 @@ namespace Controle_Financeiro_Pessoal.Model
     {
         [Key]
         public int C2ID { get; set; }
-        public string C2Titulo_Lancamento { get; set; }
+        public string? C2Titulo_Lancamento { get; set; }
         public decimal C2Valor { get; set; }
         public string? C2Observacao { get; set; }
         public required DateTime C2Data_Lancamento { get; set; }
@@ -28,5 +28,12 @@ namespace Controle_Financeiro_Pessoal.Model
         [ForeignKey("C6Conta")]
         public required int C2FKC6ID_Conta { get; set; }
         public C6Conta? C6Conta { get; set; }
+        //Definição FK dentro da tabela sendo a Pai a propria PK da tabela
+        [ForeignKey("C2LancamentoPai")]
+        public int? C2FKC2ID_Lancamento_Pai { get; set; }
+        public C2Lancamento? C2LancamentoPai { get; set; }
+        [ForeignKey("C6Conta_Transferencia")]
+        public int? C2FKC6ID_Conta_Transferencia { get; set; }
+        public C6Conta? C6Conta_Transferencia { get; set; }
     }
 }

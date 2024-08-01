@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            rdb_transferencia = new RadioButton();
+            radioButton1 = new RadioButton();
             panel2 = new Panel();
             label1 = new Label();
             btn_cancelar = new Button();
             rdb_pagar = new RadioButton();
             rdb_Receber = new RadioButton();
-            radioButton1 = new RadioButton();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -42,6 +43,7 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.Menu;
+            panel1.Controls.Add(rdb_transferencia);
             panel1.Controls.Add(radioButton1);
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(btn_cancelar);
@@ -49,8 +51,34 @@
             panel1.Controls.Add(rdb_Receber);
             panel1.Location = new Point(-3, -2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(252, 220);
+            panel1.Size = new Size(252, 223);
             panel1.TabIndex = 0;
+            // 
+            // rdb_transferencia
+            // 
+            rdb_transferencia.AutoSize = true;
+            rdb_transferencia.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            rdb_transferencia.Location = new Point(73, 127);
+            rdb_transferencia.Name = "rdb_transferencia";
+            rdb_transferencia.Size = new Size(130, 25);
+            rdb_transferencia.TabIndex = 5;
+            rdb_transferencia.TabStop = true;
+            rdb_transferencia.Text = "Transferência";
+            rdb_transferencia.UseVisualStyleBackColor = true;
+            rdb_transferencia.CheckedChanged += rdb_transferencia_CheckedChanged;
+            // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Checked = true;
+            radioButton1.Location = new Point(15, 96);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(94, 19);
+            radioButton1.TabIndex = 4;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "radioButton1";
+            radioButton1.UseVisualStyleBackColor = true;
+            radioButton1.Visible = false;
             // 
             // panel2
             // 
@@ -74,7 +102,7 @@
             // btn_cancelar
             // 
             btn_cancelar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btn_cancelar.Location = new Point(15, 159);
+            btn_cancelar.Location = new Point(15, 158);
             btn_cancelar.Name = "btn_cancelar";
             btn_cancelar.Size = new Size(220, 47);
             btn_cancelar.TabIndex = 2;
@@ -86,7 +114,7 @@
             // 
             rdb_pagar.AutoSize = true;
             rdb_pagar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            rdb_pagar.Location = new Point(73, 115);
+            rdb_pagar.Location = new Point(73, 96);
             rdb_pagar.Name = "rdb_pagar";
             rdb_pagar.Size = new Size(87, 25);
             rdb_pagar.TabIndex = 1;
@@ -106,24 +134,11 @@
             rdb_Receber.UseVisualStyleBackColor = true;
             rdb_Receber.CheckedChanged += rdb_Receber_CheckedChanged;
             // 
-            // radioButton1
-            // 
-            radioButton1.AutoSize = true;
-            radioButton1.Checked = true;
-            radioButton1.Location = new Point(15, 96);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(94, 19);
-            radioButton1.TabIndex = 4;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "radioButton1";
-            radioButton1.UseVisualStyleBackColor = true;
-            radioButton1.Visible = false;
-            // 
             // Fo_Escolhe_Tipo_Lancamento
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(244, 216);
+            ClientSize = new Size(244, 220);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
@@ -148,5 +163,6 @@
         private Panel panel2;
         private Label label1;
         private RadioButton radioButton1;
+        private RadioButton rdb_transferencia;
     }
 }

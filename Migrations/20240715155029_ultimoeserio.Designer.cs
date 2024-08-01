@@ -3,6 +3,7 @@ using System;
 using Controle_Financeiro_Pessoal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Controle_Financeiro_Pessoal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240715155029_ultimoeserio")]
+    partial class ultimoeserio
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,10 +115,6 @@ namespace Controle_Financeiro_Pessoal.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("C2FKC6ID_Conta");
 
-                    b.Property<int?>("C2FKC6ID_Conta_Transferencia")
-                        .HasColumnType("integer")
-                        .HasColumnName("C2FKC6ID_Conta_Transferencia");
-
                     b.Property<string>("C2Observacao")
                         .HasColumnType("text")
                         .HasColumnName("C2Observacao");
@@ -141,8 +140,6 @@ namespace Controle_Financeiro_Pessoal.Migrations
                     b.HasIndex("C2FKC5ID_Tipo_Lancamento");
 
                     b.HasIndex("C2FKC6ID_Conta");
-
-                    b.HasIndex("C2FKC6ID_Conta_Transferencia");
 
                     b.ToTable("C2Lancamento");
                 });
@@ -277,10 +274,6 @@ namespace Controle_Financeiro_Pessoal.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Controle_Financeiro_Pessoal.Model.C6Conta", "C6Conta_Transferencia")
-                        .WithMany()
-                        .HasForeignKey("C2FKC6ID_Conta_Transferencia");
-
                     b.Navigation("C1Usuario");
 
                     b.Navigation("C2LancamentoPai");
@@ -292,8 +285,6 @@ namespace Controle_Financeiro_Pessoal.Migrations
                     b.Navigation("C5Tipo_Lancamento");
 
                     b.Navigation("C6Conta");
-
-                    b.Navigation("C6Conta_Transferencia");
                 });
 
             modelBuilder.Entity("Controle_Financeiro_Pessoal.Model.C6Conta", b =>
