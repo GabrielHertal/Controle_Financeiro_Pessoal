@@ -3,6 +3,7 @@ using System;
 using Controle_Financeiro_Pessoal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Controle_Financeiro_Pessoal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240807024435_ajustec7categoriapenultimo")]
+    partial class ajustec7categoriapenultimo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -265,10 +268,6 @@ namespace Controle_Financeiro_Pessoal.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("C7Nome");
-
-                    b.Property<int>("C7Tipo_Categoria")
-                        .HasColumnType("integer")
-                        .HasColumnName("C7Tipo_Categoria");
 
                     b.HasKey("C7Id");
 

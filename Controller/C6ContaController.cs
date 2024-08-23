@@ -31,7 +31,7 @@ namespace Controle_Financeiro_Pessoal.Controller
                     && c6.C2FKC4ID_Moeda != 2 
                     && c6.C2FKC4ID_Moeda != 6)
                 .ToListAsync();
-            var saldoPorConta = new Dictionary<int, decimal>();
+            var saldoPorConta = new Dictionary<int, float>();
             foreach (var lancamento in c2lancamentos)
             {
                 // Se o lançamento é um recebimento (tipo 2)

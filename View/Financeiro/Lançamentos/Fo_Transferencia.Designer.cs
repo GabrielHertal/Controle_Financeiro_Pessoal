@@ -221,6 +221,10 @@
             txt_valor.Name = "txt_valor";
             txt_valor.Size = new Size(129, 25);
             txt_valor.TabIndex = 2;
+            txt_valor.Text = "R$ 0,00";
+            txt_valor.KeyPress += txt_valor_KeyPress;
+            txt_valor.KeyUp += txt_valor_KeyUp;
+            txt_valor.Leave += txt_valor_Leave;
             // 
             // cbx_destino
             // 

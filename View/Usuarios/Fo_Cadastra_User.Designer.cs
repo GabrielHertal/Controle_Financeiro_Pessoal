@@ -190,6 +190,10 @@
             txt_renda.Name = "txt_renda";
             txt_renda.Size = new Size(228, 25);
             txt_renda.TabIndex = 3;
+            txt_renda.Text = "R$ 0,00";
+            txt_renda.KeyPress += txt_renda_KeyPress;
+            txt_renda.KeyUp += txt_renda_KeyUp;
+            txt_renda.Leave += txt_renda_Leave;
             // 
             // label6
             // 

@@ -30,6 +30,9 @@
         {
             components = new System.ComponentModel.Container();
             panel_lancamento = new Panel();
+            btn_adiciona_categoria = new Button();
+            cbx_categorias = new ComboBox();
+            c7CategoriaBindingSource = new BindingSource(components);
             btn_pago = new Button();
             label8 = new Label();
             cbx_parcelas = new ComboBox();
@@ -46,12 +49,12 @@
             label4 = new Label();
             label3 = new Label();
             dtp_prev_pagamento = new DateTimePicker();
-            dtp_pagamento = new DateTimePicker();
             txt_valor = new TextBox();
             label2 = new Label();
             txt_titulo_lancamento = new TextBox();
             label1 = new Label();
             panel_lancamento.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)c7CategoriaBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)c4MoedaBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)c6ContaBindingSource).BeginInit();
             SuspendLayout();
@@ -59,6 +62,8 @@
             // panel_lancamento
             // 
             panel_lancamento.BackColor = SystemColors.ControlDark;
+            panel_lancamento.Controls.Add(btn_adiciona_categoria);
+            panel_lancamento.Controls.Add(cbx_categorias);
             panel_lancamento.Controls.Add(btn_pago);
             panel_lancamento.Controls.Add(label8);
             panel_lancamento.Controls.Add(cbx_parcelas);
@@ -73,7 +78,6 @@
             panel_lancamento.Controls.Add(label4);
             panel_lancamento.Controls.Add(label3);
             panel_lancamento.Controls.Add(dtp_prev_pagamento);
-            panel_lancamento.Controls.Add(dtp_pagamento);
             panel_lancamento.Controls.Add(txt_valor);
             panel_lancamento.Controls.Add(label2);
             panel_lancamento.Controls.Add(txt_titulo_lancamento);
@@ -82,6 +86,33 @@
             panel_lancamento.Name = "panel_lancamento";
             panel_lancamento.Size = new Size(544, 371);
             panel_lancamento.TabIndex = 0;
+            // 
+            // btn_adiciona_categoria
+            // 
+            btn_adiciona_categoria.Image = Properties.Resources.mais;
+            btn_adiciona_categoria.Location = new Point(320, 217);
+            btn_adiciona_categoria.Name = "btn_adiciona_categoria";
+            btn_adiciona_categoria.Size = new Size(36, 25);
+            btn_adiciona_categoria.TabIndex = 20;
+            btn_adiciona_categoria.UseVisualStyleBackColor = true;
+            btn_adiciona_categoria.Click += btn_adiciona_categoria_Click;
+            // 
+            // cbx_categorias
+            // 
+            cbx_categorias.DataSource = c7CategoriaBindingSource;
+            cbx_categorias.DisplayMember = "C7Nome";
+            cbx_categorias.Font = new Font("Segoe UI", 10F);
+            cbx_categorias.FormattingEnabled = true;
+            cbx_categorias.Location = new Point(185, 217);
+            cbx_categorias.Name = "cbx_categorias";
+            cbx_categorias.Size = new Size(131, 25);
+            cbx_categorias.TabIndex = 19;
+            cbx_categorias.ValueMember = "C7ID";
+            cbx_categorias.SelectedIndexChanged += cbx_categorias_SelectedIndexChanged;
+            // 
+            // c7CategoriaBindingSource
+            // 
+            c7CategoriaBindingSource.DataSource = typeof(Model.C7Categoria);
             // 
             // btn_pago
             // 
@@ -98,7 +129,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label8.Location = new Point(362, 245);
+            label8.Location = new Point(365, 245);
             label8.Name = "label8";
             label8.Size = new Size(102, 19);
             label8.TabIndex = 17;
@@ -176,7 +207,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label6.Location = new Point(14, 245);
+            label6.Location = new Point(12, 245);
             label6.Name = "label6";
             label6.Size = new Size(60, 19);
             label6.TabIndex = 10;
@@ -186,7 +217,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label5.Location = new Point(362, 192);
+            label5.Location = new Point(362, 195);
             label5.Name = "label5";
             label5.Size = new Size(149, 19);
             label5.TabIndex = 9;
@@ -214,15 +245,15 @@
             label4.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label4.Location = new Point(185, 195);
             label4.Name = "label4";
-            label4.Size = new Size(125, 19);
+            label4.Size = new Size(79, 19);
             label4.TabIndex = 7;
-            label4.Text = "Data Pagamento:";
+            label4.Text = "Categoria:";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label3.Location = new Point(14, 195);
+            label3.Location = new Point(12, 195);
             label3.Name = "label3";
             label3.Size = new Size(112, 19);
             label3.TabIndex = 6;
@@ -237,15 +268,6 @@
             dtp_prev_pagamento.Size = new Size(165, 25);
             dtp_prev_pagamento.TabIndex = 5;
             // 
-            // dtp_pagamento
-            // 
-            dtp_pagamento.Font = new Font("Segoe UI", 10F);
-            dtp_pagamento.Format = DateTimePickerFormat.Short;
-            dtp_pagamento.Location = new Point(185, 217);
-            dtp_pagamento.Name = "dtp_pagamento";
-            dtp_pagamento.Size = new Size(171, 25);
-            dtp_pagamento.TabIndex = 4;
-            // 
             // txt_valor
             // 
             txt_valor.Font = new Font("Segoe UI", 10F);
@@ -253,8 +275,11 @@
             txt_valor.Name = "txt_valor";
             txt_valor.Size = new Size(171, 25);
             txt_valor.TabIndex = 3;
-            txt_valor.Text = "0";
+            txt_valor.Text = "R$ 0,00";
             txt_valor.TextChanged += txt_valor_TextChanged;
+            txt_valor.KeyPress += txt_valor_KeyPress;
+            txt_valor.KeyUp += txt_valor_KeyUp;
+            txt_valor.Leave += txt_valor_Leave;
             // 
             // label2
             // 
@@ -299,6 +324,7 @@
             Load += Fo_Realiza_Lancamento_Load;
             panel_lancamento.ResumeLayout(false);
             panel_lancamento.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)c7CategoriaBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)c4MoedaBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)c6ContaBindingSource).EndInit();
             ResumeLayout(false);
@@ -307,7 +333,6 @@
         #endregion
 
         private Panel panel_lancamento;
-        private DateTimePicker dtp_pagamento;
         private TextBox txt_valor;
         private Label label2;
         private TextBox txt_titulo_lancamento;
@@ -328,5 +353,8 @@
         private Button btn_pago;
         private BindingSource c4MoedaBindingSource;
         private BindingSource c6ContaBindingSource;
+        private ComboBox cbx_categorias;
+        private BindingSource c7CategoriaBindingSource;
+        private Button btn_adiciona_categoria;
     }
 }

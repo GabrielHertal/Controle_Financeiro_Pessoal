@@ -38,6 +38,11 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro
             };
             if (_editar == false)
             {
+                if (string.IsNullOrEmpty(txt_conta.Text) || cbx_tipo_conta.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Existem campos vazios, verifique!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
                 await _c6ContaController.AdicionarC6Conta(conta);
                 MessageBox.Show("Conta criada com sucesso", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
@@ -45,6 +50,11 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro
             }
             else
             {
+                if (string.IsNullOrEmpty(txt_conta.Text) || cbx_tipo_conta.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Existem campos vazios, verifique!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
                 _c6ContaController.AtualizarC6Conta(_id, conta);
                 MessageBox.Show("Conta editada com sucesso", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;

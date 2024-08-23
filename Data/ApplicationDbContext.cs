@@ -16,6 +16,7 @@ namespace Controle_Financeiro_Pessoal.Data
         public DbSet<C4Moeda> C4Moeda { get; set; }
         public DbSet<C5Tipo_Lancamento> C5Tipo_Lancamento { get; set; }
         public DbSet<C6Conta> C6Conta { get; set; }
+        public DbSet<C7Categoria> C7Categoria { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

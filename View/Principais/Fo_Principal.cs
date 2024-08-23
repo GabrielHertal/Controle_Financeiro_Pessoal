@@ -45,7 +45,8 @@ namespace Controle_Financeiro_Pessoal
         {
             C2LancamentoController c2lancamentocontroller = new C2LancamentoController();
             C6ContaController c6Contacontroller = new C6ContaController();
-            OpenChildForm(new Fo_Lancamentos(_c1usuariocontroller.usuariologado, c2lancamentocontroller, c6Contacontroller));
+            C7CategoriaController c7categoriacontroller = new C7CategoriaController();
+            OpenChildForm(new Fo_Lancamentos(_c1usuariocontroller.usuariologado, c2lancamentocontroller, c6Contacontroller, c7categoriacontroller));
         }
         private void Fo_Principal_FormClosed(object sender, FormClosedEventArgs e)
         {

@@ -4,7 +4,7 @@
     {
         public required int C2FKC1Id_Usuario { get; set; }
         public int C2LancamentoId { get; set; }
-        public string? C2LancamentoNome { get; set; }
+        public required string C2LancamentoNome { get; set; }
         public required string C2LancamentoValor { get; set; }
         public int C2Tipo_Lancamento { get; set; }
         public DateTime? C2DataLancamento { get; set; }
@@ -22,5 +22,7 @@
         public int? C2FKC6ID_Conta_Transferencia { get; set; }
         public int? C2FKC5ID_Tipo_Lancamento { get; set; }
         public int? C2FKC2ID_Lancamento_Pai { get; set; }
+        public int? C2FKC7ID_Categoria { get; set; }
+        public string? C2FKC7Nome_Categoria { get; set; }
     }
 }

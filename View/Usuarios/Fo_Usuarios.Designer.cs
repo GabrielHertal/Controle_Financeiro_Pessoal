@@ -29,21 +29,21 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel_usuarios = new Panel();
+            btn_adicionar = new Button();
             btn_excluir = new Button();
             grid_usuarios = new DataGridView();
-            c1UsuarioBindingSource = new BindingSource(components);
+            c1UsuarioDTOBindingSource = new BindingSource(components);
             c1IDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             c1NomeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            c1CpfDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            c1CPFDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             c1EmailDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             c1RendaMensalDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            btn_adicionar = new Button();
             panel_usuarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)grid_usuarios).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)c1UsuarioBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)c1UsuarioDTOBindingSource).BeginInit();
             SuspendLayout();
             // 
             // panel_usuarios
@@ -58,6 +58,16 @@
             panel_usuarios.Name = "panel_usuarios";
             panel_usuarios.Size = new Size(1409, 811);
             panel_usuarios.TabIndex = 0;
+            // 
+            // btn_adicionar
+            // 
+            btn_adicionar.Image = Properties.Resources.mais;
+            btn_adicionar.Location = new Point(14, 20);
+            btn_adicionar.Name = "btn_adicionar";
+            btn_adicionar.Size = new Size(70, 60);
+            btn_adicionar.TabIndex = 3;
+            btn_adicionar.UseVisualStyleBackColor = true;
+            btn_adicionar.Click += btn_adicionar_Click;
             // 
             // btn_excluir
             // 
@@ -78,26 +88,26 @@
             grid_usuarios.AutoGenerateColumns = false;
             grid_usuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             grid_usuarios.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = SystemColors.Control;
-            dataGridViewCellStyle15.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            dataGridViewCellStyle15.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = SystemColors.HotTrack;
-            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
-            grid_usuarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.HotTrack;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            grid_usuarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             grid_usuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            grid_usuarios.Columns.AddRange(new DataGridViewColumn[] { c1IDDataGridViewTextBoxColumn, c1NomeDataGridViewTextBoxColumn, c1CpfDataGridViewTextBoxColumn, c1EmailDataGridViewTextBoxColumn, c1RendaMensalDataGridViewTextBoxColumn });
-            grid_usuarios.DataSource = c1UsuarioBindingSource;
-            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.BackColor = SystemColors.Window;
-            dataGridViewCellStyle16.Font = new Font("Segoe UI", 10F);
-            dataGridViewCellStyle16.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle16.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.False;
-            grid_usuarios.DefaultCellStyle = dataGridViewCellStyle16;
-            grid_usuarios.Location = new Point(14, 83);
+            grid_usuarios.Columns.AddRange(new DataGridViewColumn[] { c1IDDataGridViewTextBoxColumn, c1NomeDataGridViewTextBoxColumn, c1CPFDataGridViewTextBoxColumn, c1EmailDataGridViewTextBoxColumn, c1RendaMensalDataGridViewTextBoxColumn });
+            grid_usuarios.DataSource = c1UsuarioDTOBindingSource;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            grid_usuarios.DefaultCellStyle = dataGridViewCellStyle2;
+            grid_usuarios.Location = new Point(16, 83);
             grid_usuarios.MultiSelect = false;
             grid_usuarios.Name = "grid_usuarios";
             grid_usuarios.ReadOnly = true;
@@ -106,14 +116,14 @@
             grid_usuarios.TabIndex = 1;
             grid_usuarios.CellMouseDoubleClick += grid_usuarios_CellMouseDoubleClick;
             // 
-            // c1UsuarioBindingSource
+            // c1UsuarioDTOBindingSource
             // 
-            c1UsuarioBindingSource.DataSource = typeof(Model.C1Usuario);
+            c1UsuarioDTOBindingSource.DataSource = typeof(DTO.C1UsuarioDTO);
             // 
             // c1IDDataGridViewTextBoxColumn
             // 
             c1IDDataGridViewTextBoxColumn.DataPropertyName = "C1ID";
-            c1IDDataGridViewTextBoxColumn.FillWeight = 2.5F;
+            c1IDDataGridViewTextBoxColumn.FillWeight = 20F;
             c1IDDataGridViewTextBoxColumn.HeaderText = "ID";
             c1IDDataGridViewTextBoxColumn.Name = "c1IDDataGridViewTextBoxColumn";
             c1IDDataGridViewTextBoxColumn.ReadOnly = true;
@@ -121,44 +131,34 @@
             // c1NomeDataGridViewTextBoxColumn
             // 
             c1NomeDataGridViewTextBoxColumn.DataPropertyName = "C1Nome";
-            c1NomeDataGridViewTextBoxColumn.FillWeight = 15.6903543F;
+            c1NomeDataGridViewTextBoxColumn.FillWeight = 120F;
             c1NomeDataGridViewTextBoxColumn.HeaderText = "NOME";
             c1NomeDataGridViewTextBoxColumn.Name = "c1NomeDataGridViewTextBoxColumn";
             c1NomeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // c1CpfDataGridViewTextBoxColumn
+            // c1CPFDataGridViewTextBoxColumn
             // 
-            c1CpfDataGridViewTextBoxColumn.DataPropertyName = "C1Cpf";
-            c1CpfDataGridViewTextBoxColumn.FillWeight = 7.690354F;
-            c1CpfDataGridViewTextBoxColumn.HeaderText = "CPF";
-            c1CpfDataGridViewTextBoxColumn.Name = "c1CpfDataGridViewTextBoxColumn";
-            c1CpfDataGridViewTextBoxColumn.ReadOnly = true;
+            c1CPFDataGridViewTextBoxColumn.DataPropertyName = "C1CPF";
+            c1CPFDataGridViewTextBoxColumn.FillWeight = 60F;
+            c1CPFDataGridViewTextBoxColumn.HeaderText = "CPF";
+            c1CPFDataGridViewTextBoxColumn.Name = "c1CPFDataGridViewTextBoxColumn";
+            c1CPFDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // c1EmailDataGridViewTextBoxColumn
             // 
             c1EmailDataGridViewTextBoxColumn.DataPropertyName = "C1Email";
-            c1EmailDataGridViewTextBoxColumn.FillWeight = 12.6903543F;
+            c1EmailDataGridViewTextBoxColumn.FillWeight = 80F;
             c1EmailDataGridViewTextBoxColumn.HeaderText = "E-MAIL";
             c1EmailDataGridViewTextBoxColumn.Name = "c1EmailDataGridViewTextBoxColumn";
             c1EmailDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // c1RendaMensalDataGridViewTextBoxColumn
             // 
-            c1RendaMensalDataGridViewTextBoxColumn.DataPropertyName = "C1Renda_Mensal";
-            c1RendaMensalDataGridViewTextBoxColumn.FillWeight = 5.690354F;
+            c1RendaMensalDataGridViewTextBoxColumn.DataPropertyName = "C1RendaMensal";
+            c1RendaMensalDataGridViewTextBoxColumn.FillWeight = 70F;
             c1RendaMensalDataGridViewTextBoxColumn.HeaderText = "RENDA MENSAL";
             c1RendaMensalDataGridViewTextBoxColumn.Name = "c1RendaMensalDataGridViewTextBoxColumn";
             c1RendaMensalDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // btn_adicionar
-            // 
-            btn_adicionar.Image = Properties.Resources.mais;
-            btn_adicionar.Location = new Point(14, 20);
-            btn_adicionar.Name = "btn_adicionar";
-            btn_adicionar.Size = new Size(70, 60);
-            btn_adicionar.TabIndex = 3;
-            btn_adicionar.UseVisualStyleBackColor = true;
-            btn_adicionar.Click += btn_adicionar_Click;
             // 
             // Fo_Usuarios
             // 
@@ -175,7 +175,7 @@
             Load += Fo_Usuarios_Load;
             panel_usuarios.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)grid_usuarios).EndInit();
-            ((System.ComponentModel.ISupportInitialize)c1UsuarioBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)c1UsuarioDTOBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -188,13 +188,13 @@
         private ColumnHeader C1Renda_Mensal;
         public ListView lv_usuarios;
         private DataGridView grid_usuarios;
-        private BindingSource c1UsuarioBindingSource;
         private Button btn_excluir;
+        private Button btn_adicionar;
+        private BindingSource c1UsuarioDTOBindingSource;
         private DataGridViewTextBoxColumn c1IDDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn c1NomeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn c1CpfDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn c1CPFDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn c1EmailDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn c1RendaMensalDataGridViewTextBoxColumn;
-        private Button btn_adicionar;
     }
 }

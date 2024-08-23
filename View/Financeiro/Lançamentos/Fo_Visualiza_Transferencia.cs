@@ -13,7 +13,8 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro.Lançamentos
         public int _tipo_lancamento;
         public int _id_status_lancamento;
         public int _id_moeda;
-        public Fo_Visualiza_Transferencia(C6ContaController c6ContaController, int usuariologado, int id_lancamento, bool editar, int tipo_lancamento, C2LancamentoController c2LancamentoController)
+        public Fo_Visualiza_Transferencia(C6ContaController c6ContaController, int usuariologado, int id_lancamento, bool editar, int tipo_lancamento,
+            C2LancamentoController c2LancamentoController)
         {
             _c6ContaController = c6ContaController;
             _usuariologado = usuariologado;
@@ -32,7 +33,7 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro.Lançamentos
             C2LancamentoDTO? _c2lancamentodto = await _c2LancamentoController.ObterC2Lancamento(id);
             txt_titulo.Text = _c2lancamentodto.C2LancamentoNome;
             Rtxt_observacao.Text = _c2lancamentodto.C2Observacao;
-            txt_valor.Text = _c2lancamentodto.C2LancamentoValor.ToString();
+            txt_valor.Text = "R$ " + _c2lancamentodto.C2LancamentoValor.ToString();
             txt_data_lanc.Text = _c2lancamentodto.C2DataLancamento.ToString();
             txt_prev_pag.Text = _c2lancamentodto.C2Data_Prev_Pag.ToString();
             txt_data_pag.Text = _c2lancamentodto.C2Data_Pag.ToString();

@@ -1,5 +1,6 @@
 ﻿using Controle_Financeiro_Pessoal.Controller;
 using Controle_Financeiro_Pessoal.DTO;
+using Controle_Financeiro_Pessoal.Function;
 using Controle_Financeiro_Pessoal.Model;
 
 namespace Controle_Financeiro_Pessoal.View.Financeiro
@@ -12,7 +13,9 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro
         public int _id_lancamento;
         private readonly C6ContaController _c6ContaController;
         private readonly C2LancamentoController _c2lancamentocontroller;
-        public Fo_Transferencia(int tipo_lancamento, int usuariologado, C6ContaController c6contacontroller, C2LancamentoController c2lancamentocontroller, bool editar, int id_lancamento)
+        FormatarValor _formatar_valor = new FormatarValor();
+        public Fo_Transferencia(int tipo_lancamento, int usuariologado, C6ContaController c6contacontroller, C2LancamentoController c2lancamentocontroller,
+            bool editar, int id_lancamento)
         {
             _c2lancamentocontroller = c2lancamentocontroller;
             _tipo_lancamento = tipo_lancamento;
@@ -27,7 +30,7 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro
             C2LancamentoDTO? _c2lancamentodto = await _c2lancamentocontroller.ObterC2Lancamento(id);
             txt_titulo.Text = _c2lancamentodto.C2LancamentoNome;
             Rtxt_observacao.Text = _c2lancamentodto.C2Observacao;
-            txt_valor.Text = _c2lancamentodto.C2LancamentoValor.ToString();
+            txt_valor.Text = "R$ " + _c2lancamentodto.C2LancamentoValor.ToString();
             dtp_prev_pag.Text = _c2lancamentodto.C2Data_Prev_Pag.ToString();
             dtp_pag.Text = _c2lancamentodto.C2Data_Pag.ToString();
             cbx_conta_origem.SelectedValue = _c2lancamentodto.C2FKC6Id_Conta;
@@ -52,9 +55,19 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro
             int _id_origem = (int)cbx_conta_origem.SelectedValue;
             int _id_destino = (int)cbx_destino.SelectedValue;
             string _titulo_transferencia = txt_titulo.Text;
-            decimal _valor = Convert.ToDecimal(txt_valor.Text);
+            float _valor = float.Parse(txt_valor.Text.Replace("R$ ", ""));
             string _observacao = Rtxt_observacao.Text;
             DateTime _data_previa_pag = dtp_prev_pag.Value.Kind == DateTimeKind.Utc ? dtp_prev_pag.Value : dtp_prev_pag.Value.ToUniversalTime();
+            if (string.IsNullOrEmpty(txt_titulo.Text))
+            {
+                MessageBox.Show("É preciso informar um título para este lançamento!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (txt_valor.Text == "R$ 0,00")
+            {
+                MessageBox.Show("É preciso informar um valor para este Lançamento!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (_id_origem == _id_destino)
             {
                 MessageBox.Show("Contas de Origem e Destino não podem ser iguais!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -118,6 +131,16 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro
         {
             int _id_origem = (int)cbx_conta_origem.SelectedValue;
             int _id_destino = (int)cbx_destino.SelectedValue;
+            if (string.IsNullOrEmpty(txt_titulo.Text))
+            {
+                MessageBox.Show("É preciso informar um título para este lançamento!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (txt_valor.Text == "R$ 0,00")
+            {
+                MessageBox.Show("É preciso informar um valor para este Lançamento!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (_id_origem == _id_destino)
             {
                 MessageBox.Show("Contas de Origem e Destino não podem ser iguais", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -134,7 +157,7 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro
                 return;
             }
             string _titulo_transferencia = txt_titulo.Text;
-            decimal _valor = Convert.ToDecimal(txt_valor.Text);
+            float _valor = float.Parse(txt_valor.Text.Replace("R$ ", ""));
             string _observacao = Rtxt_observacao.Text;
             DateTime _data_previa_pag = dtp_prev_pag.Value.Kind == DateTimeKind.Utc ? dtp_prev_pag.Value : dtp_prev_pag.Value.ToUniversalTime();
             DateTime _dtp_pagamento = dtp_pag.Value.Kind == DateTimeKind.Utc ? dtp_pag.Value : dtp_pag.Value.ToUniversalTime();
@@ -182,5 +205,20 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro
                 MessageBox.Show("Transferência atualizada com sucesso!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+        #region Tratamento do campo Valor
+        private void txt_valor_Leave(object sender, EventArgs e)
+        {
+            _formatar_valor.TratarLeave(sender, e);
+        }
+
+        private void txt_valor_KeyUp(object sender, KeyEventArgs e)
+        {
+            _formatar_valor.TratarKeyUp(sender, e);
+        }
+        private void txt_valor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            _formatar_valor.TratarKeyPress(sender, e);
+        }
+        #endregion
     }
 }

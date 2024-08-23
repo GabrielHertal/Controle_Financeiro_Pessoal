@@ -19,7 +19,7 @@ namespace Controle_Financeiro_Pessoal.Controller
                 .Include(c2 => c2.C4Moeda)
                 .Include(c2 => c2.C5Tipo_Lancamento)
                 .Include(c2 => c2.C3Status_Lancamento)
-                .OrderBy(c2 => c2.C2ID)
+                .OrderBy(c2 => c2.C2Data_Previa_Pagamento)
                 .Select(c2 => new C2LancamentoDTO
                 {
                     C2LancamentoId = c2.C2ID,
@@ -28,14 +28,15 @@ namespace Controle_Financeiro_Pessoal.Controller
                     C2DataLancamento = c2.C2Data_Previa_Pagamento,
                     C2Data_Prev_Pag = c2.C2Data_Previa_Pagamento,
                     C2Data_Pag = c2.C2Data_Pagamento,
-                    C2FKC3Nome_Status_Lancamento = c2.C3Status_Lancamento.C3Nome_Status,
-                    C2FKC4Nome_Moeda = c2.C4Moeda.C4Nome_Moeda,
+                    C2FKC3Nome_Status_Lancamento = c2.C3Status_Lancamento != null ? c2.C3Status_Lancamento.C3Nome_Status : null,
+                    C2FKC4Nome_Moeda = c2.C4Moeda.C4Nome_Moeda != null ? c2.C4Moeda.C4Nome_Moeda : c2.C4Moeda.C4Nome_Moeda,
                     C2FKC4Id_Moeda = c2.C2FKC4ID_Moeda,
-                    C2FKC5Tipo_Lancamento = c2.C5Tipo_Lancamento.C5Nome_Tipo_Lancamento,
-                    C2FKC6Nome_Conta = c2.C6Conta_Transferencia.C6Nome ?? c2.C6Conta.C6Nome,
+                    C2FKC5Tipo_Lancamento = c2.C5Tipo_Lancamento != null ? c2.C5Tipo_Lancamento.C5Nome_Tipo_Lancamento : null,
+                    C2FKC6Nome_Conta = c2.C6Conta_Transferencia != null ? c2.C6Conta_Transferencia.C6Nome : c2.C6Conta.C6Nome,
                     C2FKC5ID_Tipo_Lancamento = c2.C2FKC5ID_Tipo_Lancamento,
                     C2FKC1Id_Usuario = c2.C2FKC1ID_User,
-                    C2FKC3Id_Status_Lancamento = c2.C2FKC3ID_Status
+                    C2FKC3Id_Status_Lancamento = c2.C2FKC3ID_Status,
+                    C2FKC7ID_Categoria = c2.C2FKC7ID_Categoria
                 })
                 .ToListAsync();
         }
@@ -66,16 +67,18 @@ namespace Controle_Financeiro_Pessoal.Controller
                     C2FKC3Nome_Status_Lancamento = c.C3Status_Lancamento.C3Nome_Status,
                     C2FKC3Id_Status_Lancamento = c.C3Status_Lancamento.C3ID,
                     C2FKC4Nome_Moeda = c.C4Moeda.C4Nome_Moeda,
-                    C2FKC5Tipo_Lancamento = c.C5Tipo_Lancamento.C5Nome_Tipo_Lancamento,
+                    C2FKC5Tipo_Lancamento = c.C5Tipo_Lancamento != null ? c.C5Tipo_Lancamento.C5Nome_Tipo_Lancamento : null,
                     C2FKC6Nome_Conta = c.C6Conta.C6Nome,
                     C2Observacao = c.C2Observacao,
                     C2Tipo_Lancamento = c.C2FKC5ID_Tipo_Lancamento,
                     C2FKC4Id_Moeda = c.C4Moeda.C4ID,
                     C2FKC6Id_Conta = c.C6Conta.C6Id,
-                    C2FKC6Nome_Conta_Transferencia = c.C6Conta_Transferencia.C6Nome,
-                    C2FKC6ID_Conta_Transferencia = c.C6Conta_Transferencia.C6Id,
+                    C2FKC6Nome_Conta_Transferencia = c.C6Conta_Transferencia != null ? c.C6Conta_Transferencia.C6Nome : null,
+                    C2FKC6ID_Conta_Transferencia = c.C6Conta_Transferencia != null ? c.C6Conta_Transferencia.C6Id : 0,
                     C2FKC1Id_Usuario = c.C2FKC1ID_User,
-                    C2FKC2ID_Lancamento_Pai = c.C2FKC2ID_Lancamento_Pai
+                    C2FKC2ID_Lancamento_Pai = c.C2FKC2ID_Lancamento_Pai,
+                    C2FKC7ID_Categoria = c.C2FKC7ID_Categoria,
+                    C2FKC7Nome_Categoria = c.C7Categoria.C7Nome != null ? c.C7Categoria.C7Nome : c.C7Categoria.C7Nome
                 })
                 .FirstOrDefaultAsync();
         }
@@ -128,7 +131,6 @@ namespace Controle_Financeiro_Pessoal.Controller
                     c2Lancamento.C2Data_Pagamento = DateTime.UtcNow.AddHours(-3);
                     c2Lancamento.C2FKC3ID_Status = 2;
                     await _Context.SaveChangesAsync();
-                    MessageBox.Show("Lançamento atualizado com sucesso!");
                 }
                 else
                 {
@@ -138,10 +140,9 @@ namespace Controle_Financeiro_Pessoal.Controller
         }
         public async Task<List<C2Lancamento>> ListarC2Lancamento_Filhos(int _id_lancamento_pai)
         {
-            var batata = await _Context.C2Lancamento
+            return await _Context.C2Lancamento
                 .Where(c => c.C2FKC2ID_Lancamento_Pai == _id_lancamento_pai)
                 .ToListAsync();
-            return batata;
         }
         public async Task<int> QtdParcelasC2Lancamentos_Filho(int id_lancamento)
         {
@@ -150,7 +151,8 @@ namespace Controle_Financeiro_Pessoal.Controller
         }
         public async Task AtualizarC2LancamentoFilho(C2Lancamento c2lancamento)
         {
-            var existingLancamento = await _Context.C2Lancamento.FindAsync(c2lancamento.C2ID);
+            var existingLancamento = await _Context.C2Lancamento
+                                        .FindAsync(c2lancamento.C2ID);
             if (existingLancamento != null)
             {
                 _Context.Entry(existingLancamento).CurrentValues.SetValues(c2lancamento);
@@ -169,13 +171,14 @@ namespace Controle_Financeiro_Pessoal.Controller
         }
         public async Task AtualizarStatusC2Lancamento(int? id_lancamento_pai)
         {
-            int totallancamentos;
-            int totallancamentospagos;
-            totallancamentos = await _Context.C2Lancamento
-                .CountAsync(c => c.C2FKC2ID_Lancamento_Pai == id_lancamento_pai);
-            totallancamentospagos = await _Context.C2Lancamento
-                .CountAsync(c => c.C2FKC2ID_Lancamento_Pai == id_lancamento_pai && c.C2FKC3ID_Status == 2);
-            if (totallancamentos == totallancamentospagos)
+            int TotalLancamentos;
+            int TotaLancamentosPagos;
+            TotalLancamentos = await _Context.C2Lancamento
+                                        .CountAsync(c => c.C2FKC2ID_Lancamento_Pai == id_lancamento_pai);
+            TotaLancamentosPagos = await _Context.C2Lancamento
+                                            .CountAsync(c => c.C2FKC2ID_Lancamento_Pai == id_lancamento_pai 
+                                                        && c.C2FKC3ID_Status == 2);
+            if (TotalLancamentos == TotaLancamentosPagos)
             {
                 C2Lancamento? c2lancamento_update = await _Context.C2Lancamento
                     .Where(c => c.C2ID == id_lancamento_pai)
@@ -207,5 +210,124 @@ namespace Controle_Financeiro_Pessoal.Controller
         public async Task<int> VerificaC2LancamentosPagos(int? id_lancamento_pai) => 
             await _Context.C2Lancamento
                 .CountAsync(c => c.C2FKC2ID_Lancamento_Pai == id_lancamento_pai && c.C2FKC3ID_Status == 2);
+        public async Task<List<C2Lancamento>> VerificarC2LancamentosCategoria(int? id_categoria)
+        {
+            return await _Context.C2Lancamento
+.               Where(c => c.C2FKC7ID_Categoria == id_categoria
+                    && c.C2FKC3ID_Status == 1)
+                    .ToListAsync();
+        }
+        public async Task VerificarRecriarParcelaFixas(int id_lancamento, int? id_categoria, int? tipo_categoria)
+        {
+            var count_total = await _Context.C2Lancamento
+                                    .CountAsync(c => c.C2FKC7ID_Categoria == id_categoria);
+            var count_pagos = await _Context.C2Lancamento
+                                    .CountAsync(c => c.C2FKC7ID_Categoria == id_categoria && c.C2FKC3ID_Status == 2);
+            var datamaxima = await _Context.C2Lancamento
+                                    .Where(c => c.C2FKC7ID_Categoria == id_categoria)
+                                    .MaxAsync(c => c.C2Data_Previa_Pagamento);
+            C2Lancamento? lancamento = await _Context.C2Lancamento
+                                        .FirstOrDefaultAsync(c => c.C2FKC7ID_Categoria == id_categoria && c.C2Data_Previa_Pagamento == datamaxima); 
+            if (lancamento == null)
+            {
+                MessageBox.Show("Lançamento não encontrado!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (count_pagos == count_total)
+            {
+                switch (tipo_categoria) 
+                {
+                    case 1: //Caso for parcela MENSAL
+                        DialogResult result = MessageBox.Show("Deseja recriar mais 6 parcelas?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if(result == DialogResult.Yes)
+                        {
+                            for (int i = 1; i <= 6; i++)
+                            {
+                                var recriarMENSAl = new C2Lancamento
+                                {
+                                    C2FKC6ID_Conta = lancamento.C2FKC6ID_Conta != null ? lancamento.C2FKC6ID_Conta : 0,
+                                    C2FKC4ID_Moeda = lancamento.C2FKC4ID_Moeda,
+                                    C2FKC1ID_User = lancamento.C2FKC1ID_User,
+                                    C2Data_Lancamento = DateTime.UtcNow.AddHours(-3),
+                                    C2Data_Previa_Pagamento = lancamento.C2FKC7ID_Categoria == 1 ? lancamento.C2Data_Previa_Pagamento.AddMonths(i) : lancamento.C2Data_Previa_Pagamento.AddMonths(i),
+                                    C2Data_Pagamento = null, //Como ele ainda não foi pago, ele ainda não possui uma data de pagamento
+                                    C2Observacao = lancamento.C2Observacao,
+                                    C2Titulo_Lancamento = lancamento.C2Titulo_Lancamento,
+                                    C2FKC3ID_Status = 1, //Pendente Pagamento
+                                    C2Valor = lancamento.C2Valor,
+                                    C2FKC5ID_Tipo_Lancamento = lancamento.C2FKC5ID_Tipo_Lancamento,
+                                    C2FKC7ID_Categoria = lancamento.C2FKC7ID_Categoria
+                                };
+                                await AdicionarC2Lancamento(recriarMENSAl);
+                            }
+                            MessageBox.Show("Parcelas criadas com sucesso!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    break;
+                    case 2: //Caso for parcela ANUAL
+                        DialogResult resultado = MessageBox.Show("Deseja recriar mais 2 parcelas?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if(resultado == DialogResult.Yes)   
+                        {
+                            for (int i = 1; i <= 2; i++)
+                            {
+                                var recriarANUAL = new C2Lancamento
+                                {
+                                    C2FKC6ID_Conta = lancamento.C2FKC6ID_Conta != null ? lancamento.C2FKC6ID_Conta : 0,
+                                    C2FKC4ID_Moeda = lancamento.C2FKC4ID_Moeda,
+                                    C2FKC1ID_User = lancamento.C2FKC1ID_User,
+                                    C2Data_Lancamento = DateTime.UtcNow.AddHours(-3),
+                                    C2Data_Previa_Pagamento = lancamento.C2FKC7ID_Categoria == 1 ? lancamento.C2Data_Previa_Pagamento.AddYears(i) : lancamento.C2Data_Previa_Pagamento.AddYears(i),
+                                    C2Data_Pagamento = null, //Como ele ainda não foi pago, ele ainda não possui uma data de pagamento
+                                    C2Observacao = lancamento.C2Observacao,
+                                    C2Titulo_Lancamento = lancamento.C2Titulo_Lancamento,
+                                    C2FKC3ID_Status = 1, //Pendente Pagamento
+                                    C2Valor = lancamento.C2Valor,
+                                    C2FKC5ID_Tipo_Lancamento = lancamento.C2FKC5ID_Tipo_Lancamento,
+                                    C2FKC7ID_Categoria = lancamento.C2FKC7ID_Categoria
+                                };
+                                await AdicionarC2Lancamento(recriarANUAL);
+                            }
+                            MessageBox.Show("Parcelas criadas com sucesso!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        } 
+                    break;
+                }
+            }
+        }
+        public async Task<bool> VerificarSeLancamentoEstaPago(int id_lancamento)
+        {
+            var total_lancamento = await _Context.C2Lancamento
+                                            .CountAsync(c => c.C2ID == id_lancamento);
+            var total_pagos = await _Context.C2Lancamento
+                                            .CountAsync(c => c.C2ID == id_lancamento && c.C2FKC3ID_Status == 2);
+            if (total_lancamento == total_pagos)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public async Task VerificaeAtualizaValorLancamentoParcelado(int id_lancamento, int? id_lancamento_pai, float valor_origi, float valor_novo)
+        {
+            if (valor_novo != valor_origi)
+            {
+                DialogResult result = MessageBox.Show("Deseja atualizar o valor total do Lancamento PAI?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+
+                    var atualizar_lacamentopai = await _Context.C2Lancamento
+                                                .Where(c => c.C2ID == id_lancamento_pai)
+                                                .FirstOrDefaultAsync();
+                    var total_lancamento_PAI = await _Context.C2Lancamento
+                                                .Where(c => c.C2FKC2ID_Lancamento_Pai == id_lancamento_pai)
+                                                .SumAsync(c => c.C2Valor);
+                    if (atualizar_lacamentopai != null)
+                    {
+                        atualizar_lacamentopai.C2Valor = total_lancamento_PAI;
+                        await _Context.SaveChangesAsync();
+                    }
+                }
+            }
+        }
     }
 }

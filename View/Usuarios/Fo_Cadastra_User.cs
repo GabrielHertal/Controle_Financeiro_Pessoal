@@ -1,4 +1,5 @@
 ﻿using Controle_Financeiro_Pessoal.Controller;
+using Controle_Financeiro_Pessoal.Function;
 using Controle_Financeiro_Pessoal.Model;
 
 namespace Controle_Financeiro_Pessoal.View
@@ -9,6 +10,8 @@ namespace Controle_Financeiro_Pessoal.View
         Fo_Login _fo_login = new(new C1UsuarioController());
         private int _id;
         private bool _editar = false;
+        DateTime _dataatual = DateTime.UtcNow;
+        FormatarValor _formatarvalor = new FormatarValor();
         public Fo_Cadastra_User(C1UsuarioController _c1usuariocontroller, int _id = 0, bool _editar = false)
         {
             this._c1usuariocontroller = _c1usuariocontroller;
@@ -21,8 +24,18 @@ namespace Controle_Financeiro_Pessoal.View
                 PreencheCamposEditaUser(_id);
             }
         }
-        DateTime _dataatual = DateTime.UtcNow;
-        private void btn_Cadastrar_Click(object sender, EventArgs e)
+        private async void PreencheCamposEditaUser(int id)
+        {
+            C1Usuario _c1usuario = await _c1usuariocontroller.ObtemC1Usuario(id);
+            txt_nome.Text = _c1usuario.C1Nome;
+            txt_email.Text = _c1usuario.C1Email;
+            txt_senha.Text = _c1usuario.C1Senha;
+            txt_confirm_senha.Text = _c1usuario.C1Senha;
+            txt_renda.Text = _c1usuario.C1Renda_Mensal.ToString();
+            mastxt_cpf.Text = _c1usuario.C1Cpf;
+            _dataatual = _c1usuario.C1Data_Criacao;
+        }
+        private async void btn_Cadastrar_Click(object sender, EventArgs e)
         {
             string? _cpf = mastxt_cpf.Text;
             if (mastxt_cpf.Text.Length != 14)
@@ -33,7 +46,25 @@ namespace Controle_Financeiro_Pessoal.View
             string _email = txt_email.Text;
             string _senha = txt_senha.Text;
             string _confirm_senha = txt_confirm_senha.Text;
-            float _renda_mensal = float.Parse(txt_renda.Text);
+            float _renda_mensal = float.Parse(txt_renda.Text.Replace("R$ ", ""));
+            int _existe_email = await _c1usuariocontroller.VerificarExistenciaEmailC1Usuario(_email);
+            int _existe_cpf = await _c1usuariocontroller.VerificarExistenciaCPFC1Usuario(_cpf);
+
+            if (_existe_email > 0)
+            {
+                MessageBox.Show("Email ja existente!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txt_email.Text = null;
+                return;
+            }
+            if (!string.IsNullOrEmpty(_cpf))
+            {
+                if (_existe_cpf > 0)
+                {
+                    MessageBox.Show("Cpf já existente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    mastxt_cpf.Text = null;
+                    return;
+                }
+            }
             if (txt_senha.Text != txt_confirm_senha.Text)
             {
                 MessageBox.Show("Senhas informadas não coincidem!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -79,16 +110,21 @@ namespace Controle_Financeiro_Pessoal.View
 
             }
         }
-        private async void PreencheCamposEditaUser(int id)
+        #region Tratamento do campo Renda Mensal
+        private void txt_renda_KeyPress(object sender, KeyPressEventArgs e)
         {
-            C1Usuario _c1usuario = await _c1usuariocontroller.ObtemC1Usuario(id);
-            txt_nome.Text = _c1usuario.C1Nome;
-            txt_email.Text = _c1usuario.C1Email;
-            txt_senha.Text = _c1usuario.C1Senha;
-            txt_confirm_senha.Text = _c1usuario.C1Senha;
-            txt_renda.Text = _c1usuario.C1Renda_Mensal.ToString();
-            mastxt_cpf.Text = _c1usuario.C1Cpf;
-            _dataatual = _c1usuario.C1Data_Criacao;
+            _formatarvalor.TratarKeyPress(sender, e);
         }
+
+        private void txt_renda_Leave(object sender, EventArgs e)
+        {
+            _formatarvalor.TratarLeave(sender, e);
+        }
+
+        private void txt_renda_KeyUp(object sender, KeyEventArgs e)
+        {
+            _formatarvalor.TratarKeyUp(sender, e);
+        }
+        #endregion
     }
 }

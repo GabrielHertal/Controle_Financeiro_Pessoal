@@ -3,6 +3,7 @@ using System;
 using Controle_Financeiro_Pessoal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Controle_Financeiro_Pessoal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240805223936_Criacaotabelac7categoria")]
+    partial class Criacaotabelac7categoria
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,6 +95,10 @@ namespace Controle_Financeiro_Pessoal.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("C2FKC1ID_User");
 
+                    b.Property<int>("C2FKC2ID_Categoria")
+                        .HasColumnType("integer")
+                        .HasColumnName("C2FKC2ID_Categoria");
+
                     b.Property<int?>("C2FKC2ID_Lancamento_Pai")
                         .HasColumnType("integer")
                         .HasColumnName("C2FKC2ID_Lancamento_Pai");
@@ -116,16 +123,11 @@ namespace Controle_Financeiro_Pessoal.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("C2FKC6ID_Conta_Transferencia");
 
-                    b.Property<int?>("C2FKC7ID_Categoria")
-                        .HasColumnType("integer")
-                        .HasColumnName("C2FKC7ID_Categoria");
-
                     b.Property<string>("C2Observacao")
                         .HasColumnType("text")
                         .HasColumnName("C2Observacao");
 
                     b.Property<string>("C2Titulo_Lancamento")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("C2Titulo_Lancamento");
 
@@ -136,6 +138,8 @@ namespace Controle_Financeiro_Pessoal.Migrations
                     b.HasKey("C2ID");
 
                     b.HasIndex("C2FKC1ID_User");
+
+                    b.HasIndex("C2FKC2ID_Categoria");
 
                     b.HasIndex("C2FKC2ID_Lancamento_Pai");
 
@@ -148,8 +152,6 @@ namespace Controle_Financeiro_Pessoal.Migrations
                     b.HasIndex("C2FKC6ID_Conta");
 
                     b.HasIndex("C2FKC6ID_Conta_Transferencia");
-
-                    b.HasIndex("C2FKC7ID_Categoria");
 
                     b.ToTable("C2Lancamento");
                 });
@@ -257,7 +259,7 @@ namespace Controle_Financeiro_Pessoal.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("C7Id"));
 
-                    b.Property<int?>("C7FKC1ID_Usuario")
+                    b.Property<int>("C7FKC1ID_Usuario")
                         .HasColumnType("integer")
                         .HasColumnName("C7FKC1ID_Usuario");
 
@@ -265,10 +267,6 @@ namespace Controle_Financeiro_Pessoal.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("C7Nome");
-
-                    b.Property<int>("C7Tipo_Categoria")
-                        .HasColumnType("integer")
-                        .HasColumnName("C7Tipo_Categoria");
 
                     b.HasKey("C7Id");
 
@@ -282,6 +280,12 @@ namespace Controle_Financeiro_Pessoal.Migrations
                     b.HasOne("Controle_Financeiro_Pessoal.Model.C1Usuario", "C1Usuario")
                         .WithMany()
                         .HasForeignKey("C2FKC1ID_User")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Controle_Financeiro_Pessoal.Model.C7Categoria", "C7Categoria")
+                        .WithMany()
+                        .HasForeignKey("C2FKC2ID_Categoria")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -317,10 +321,6 @@ namespace Controle_Financeiro_Pessoal.Migrations
                         .WithMany()
                         .HasForeignKey("C2FKC6ID_Conta_Transferencia");
 
-                    b.HasOne("Controle_Financeiro_Pessoal.Model.C7Categoria", "C7Categoria")
-                        .WithMany()
-                        .HasForeignKey("C2FKC7ID_Categoria");
-
                     b.Navigation("C1Usuario");
 
                     b.Navigation("C2LancamentoPai");
@@ -353,7 +353,9 @@ namespace Controle_Financeiro_Pessoal.Migrations
                 {
                     b.HasOne("Controle_Financeiro_Pessoal.Model.C1Usuario", "C1Usuario")
                         .WithMany()
-                        .HasForeignKey("C7FKC1ID_Usuario");
+                        .HasForeignKey("C7FKC1ID_Usuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("C1Usuario");
                 });

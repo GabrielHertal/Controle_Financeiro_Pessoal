@@ -45,15 +45,16 @@
             panel_menu.Controls.Add(btn_usuarios);
             panel_menu.Location = new Point(-3, 0);
             panel_menu.Name = "panel_menu";
-            panel_menu.Size = new Size(355, 816);
+            panel_menu.Size = new Size(303, 816);
             panel_menu.TabIndex = 0;
             // 
             // btn_lancamentos
             // 
+            btn_lancamentos.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             btn_lancamentos.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btn_lancamentos.Location = new Point(15, 124);
             btn_lancamentos.Name = "btn_lancamentos";
-            btn_lancamentos.Size = new Size(331, 72);
+            btn_lancamentos.Size = new Size(279, 72);
             btn_lancamentos.TabIndex = 3;
             btn_lancamentos.Text = "Lançamentos";
             btn_lancamentos.UseVisualStyleBackColor = true;
@@ -65,7 +66,7 @@
             btn_contas.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btn_contas.Location = new Point(15, 280);
             btn_contas.Name = "btn_contas";
-            btn_contas.Size = new Size(331, 72);
+            btn_contas.Size = new Size(279, 72);
             btn_contas.TabIndex = 2;
             btn_contas.Text = "Contas";
             btn_contas.UseVisualStyleBackColor = true;
@@ -77,7 +78,7 @@
             btn_usuarios.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btn_usuarios.Location = new Point(15, 202);
             btn_usuarios.Name = "btn_usuarios";
-            btn_usuarios.Size = new Size(331, 72);
+            btn_usuarios.Size = new Size(279, 72);
             btn_usuarios.TabIndex = 0;
             btn_usuarios.Text = "Usuários";
             btn_usuarios.UseVisualStyleBackColor = true;
@@ -87,9 +88,9 @@
             // 
             panel_principal.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel_principal.BackColor = SystemColors.ActiveCaption;
-            panel_principal.Location = new Point(349, 0);
+            panel_principal.Location = new Point(297, 0);
             panel_principal.Name = "panel_principal";
-            panel_principal.Size = new Size(1045, 816);
+            panel_principal.Size = new Size(1097, 816);
             panel_principal.TabIndex = 1;
             // 
             // Fo_Principal

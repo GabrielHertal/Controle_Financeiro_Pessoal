@@ -35,15 +35,15 @@
             btn_realizar = new Button();
             btn_cancelar = new Button();
             panel1 = new Panel();
+            label4 = new Label();
+            txt_categoria = new TextBox();
             btn_estornar = new Button();
             txt_data_pag = new TextBox();
             txt_data_prev_pag = new TextBox();
-            txt_data_lancamento = new TextBox();
             txt_valor = new TextBox();
             label7 = new Label();
             label6 = new Label();
             label5 = new Label();
-            label4 = new Label();
             label3 = new Label();
             txt_moeda = new TextBox();
             label2 = new Label();
@@ -115,15 +115,15 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ControlDark;
+            panel1.Controls.Add(label4);
+            panel1.Controls.Add(txt_categoria);
             panel1.Controls.Add(btn_estornar);
             panel1.Controls.Add(txt_data_pag);
             panel1.Controls.Add(txt_data_prev_pag);
-            panel1.Controls.Add(txt_data_lancamento);
             panel1.Controls.Add(txt_valor);
             panel1.Controls.Add(label7);
             panel1.Controls.Add(label6);
             panel1.Controls.Add(label5);
-            panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(txt_moeda);
             panel1.Controls.Add(label2);
@@ -138,6 +138,25 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(510, 270);
             panel1.TabIndex = 6;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label4.Location = new Point(375, 13);
+            label4.Name = "label4";
+            label4.Size = new Size(75, 19);
+            label4.TabIndex = 23;
+            label4.Text = "Categoria";
+            // 
+            // txt_categoria
+            // 
+            txt_categoria.Enabled = false;
+            txt_categoria.Font = new Font("Segoe UI", 10F);
+            txt_categoria.Location = new Point(375, 35);
+            txt_categoria.Name = "txt_categoria";
+            txt_categoria.Size = new Size(114, 25);
+            txt_categoria.TabIndex = 22;
             // 
             // btn_estornar
             // 
@@ -167,15 +186,6 @@
             txt_data_prev_pag.Name = "txt_data_prev_pag";
             txt_data_prev_pag.Size = new Size(125, 25);
             txt_data_prev_pag.TabIndex = 19;
-            // 
-            // txt_data_lancamento
-            // 
-            txt_data_lancamento.Enabled = false;
-            txt_data_lancamento.Font = new Font("Segoe UI", 10F);
-            txt_data_lancamento.Location = new Point(99, 90);
-            txt_data_lancamento.Name = "txt_data_lancamento";
-            txt_data_lancamento.Size = new Size(125, 25);
-            txt_data_lancamento.TabIndex = 18;
             // 
             // txt_valor
             // 
@@ -216,21 +226,11 @@
             label5.TabIndex = 13;
             label5.Text = "Data Previa Pag.";
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label4.Location = new Point(99, 68);
-            label4.Name = "label4";
-            label4.Size = new Size(125, 19);
-            label4.TabIndex = 11;
-            label4.Text = "Data Lançamento";
-            // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label3.Location = new Point(375, 13);
+            label3.Location = new Point(100, 68);
             label3.Name = "label3";
             label3.Size = new Size(56, 19);
             label3.TabIndex = 9;
@@ -240,9 +240,9 @@
             // 
             txt_moeda.Enabled = false;
             txt_moeda.Font = new Font("Segoe UI", 10F);
-            txt_moeda.Location = new Point(375, 35);
+            txt_moeda.Location = new Point(100, 90);
             txt_moeda.Name = "txt_moeda";
-            txt_moeda.Size = new Size(114, 25);
+            txt_moeda.Size = new Size(125, 25);
             txt_moeda.TabIndex = 8;
             // 
             // label2
@@ -268,7 +268,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(502, 261);
+            ClientSize = new Size(504, 261);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
@@ -297,12 +297,12 @@
         private TextBox txt_conta;
         private Label label6;
         private Label label5;
-        private Label label4;
         private TextBox txt_valor;
         private Label label7;
         private TextBox txt_data_pag;
         private TextBox txt_data_prev_pag;
-        private TextBox txt_data_lancamento;
         private Button btn_estornar;
+        private Label label4;
+        private TextBox txt_categoria;
     }
 }

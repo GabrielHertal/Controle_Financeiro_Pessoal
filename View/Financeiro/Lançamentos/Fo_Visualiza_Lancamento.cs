@@ -15,14 +15,18 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro
         public int _id_status_lancamento;
         public int? _id_lancamento_pai;
         public int _id_moeda;
+        public int? _id_categoria;
         private readonly C6ContaController _c6ContaController;
-        public Fo_Visualiza_Lancamento(bool editar, C2LancamentoController c2LancamentoController, int id_lancamento, int usuariologado, C6ContaController c6contacontroller)
+        private readonly C7CategoriaController _c7categoriaController;
+        public Fo_Visualiza_Lancamento(bool editar, C2LancamentoController c2LancamentoController, int id_lancamento, int usuariologado, C6ContaController c6contacontroller
+            , C7CategoriaController c7categoriaconotroller)
         {
             _c2LancamentoController = c2LancamentoController;
             _editar = editar;
             _id_lancamento = id_lancamento;
             _usuariologado = usuariologado;
             _c6ContaController = c6contacontroller;
+            _c7categoriaController = c7categoriaconotroller;
             InitializeComponent();
         }
         private async void PreencheCamposEditaLancamento(int id)
@@ -30,8 +34,8 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro
             C2LancamentoDTO? _c2lancamentodto = await _c2LancamentoController.ObterC2Lancamento(id);
             txt_titulo_lancamento.Text = _c2lancamentodto.C2LancamentoNome;
             rtxt_observacao.Text = _c2lancamentodto.C2Observacao;
-            txt_valor.Text = _c2lancamentodto.C2LancamentoValor.ToString();
-            txt_data_lancamento.Text = _c2lancamentodto.C2DataLancamento.ToString();
+            txt_valor.Text = "R$ " + _c2lancamentodto.C2LancamentoValor.ToString();
+            txt_categoria.Text = _c2lancamentodto.C2FKC7Nome_Categoria;
             txt_data_prev_pag.Text = _c2lancamentodto.C2Data_Prev_Pag.ToString();
             txt_data_pag.Text = _c2lancamentodto.C2Data_Pag.ToString();
             txt_conta.Text = _c2lancamentodto.C2FKC6Nome_Conta;
@@ -40,6 +44,7 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro
             _id_status_lancamento = _c2lancamentodto.C2FKC3Id_Status_Lancamento;
             _id_lancamento_pai = _c2lancamentodto.C2FKC2ID_Lancamento_Pai;
             _id_moeda = _c2lancamentodto.C2FKC4Id_Moeda;
+            _id_categoria = _c2lancamentodto.C2FKC7ID_Categoria;
         }
         private void Fo_Confirma_Pagamento_Load(object sender, EventArgs e)
         {
@@ -57,7 +62,8 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro
                 return;
             }
             this.Hide();
-            Fo_Realiza_Lancamento fo_realiza_lancamento = new Fo_Realiza_Lancamento(_usuariologado, tipo_lancamento, _c2LancamentoController, _c6ContaController, _editar = true, _id_lancamento);
+            Fo_Realiza_Lancamento fo_realiza_lancamento = new Fo_Realiza_Lancamento(_usuariologado, tipo_lancamento, _c2LancamentoController, _c6ContaController, _editar = true
+                , _id_lancamento, _c7categoriaController);
             DialogResult result = fo_realiza_lancamento.ShowDialog();
             this.Hide();
             if (result == DialogResult.OK)
@@ -67,6 +73,7 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro
         }
         private async void btn_realizar_Click(object sender, EventArgs e)
         {
+            int? _tipo_categoria = await _c7categoriaController.VerificarTipoC7Categoria(_id_categoria);
             if (_id_status_lancamento == 2)
             {
                 MessageBox.Show("Este lançamento já esta pago!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -86,6 +93,7 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro
             else
             {
                 await _c2LancamentoController.RealizarC2Lancamento(_id_lancamento, _id_moeda);
+                await _c2LancamentoController.VerificarRecriarParcelaFixas(_id_lancamento, _id_categoria, _tipo_categoria);
                 DialogResult = DialogResult.OK;
             }
             this.Hide();
