@@ -13,17 +13,21 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro.Lançamentos
             _c7CategoriaController = c7CategoriaController;
             InitializeComponent();
         }
-        private async void Fo_Categorias_Load(object sender, EventArgs e)
+        public async Task LoadGridCategorias()
         {
             grid_categorias.DataSource = await _c7CategoriaController.ListarC7Categorias(_usuariologado);
         }
-        private void btn_adicionar_Click(object sender, EventArgs e)
+        private async void Fo_Categorias_Load(object sender, EventArgs e)
+        {
+            await LoadGridCategorias();
+        }
+        private async void btn_adicionar_Click(object sender, EventArgs e)
         {
             Fo_Cadastra_Categoria _fo_cadastra_categoria = new Fo_Cadastra_Categoria(_usuariologado, _c7CategoriaController);
             DialogResult result = _fo_cadastra_categoria.ShowDialog();
             if (result == DialogResult.OK)
             {
-                grid_categorias.DataSource = _c7CategoriaController.ListarC7Categorias(_usuariologado);
+                await LoadGridCategorias();
             }
         }
         private async void btn_excluir_Click(object sender, EventArgs e)
@@ -37,7 +41,7 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro.Lançamentos
             }
             await _c7CategoriaController.DeletarC7Categorias(_id_categoria);
             MessageBox.Show("Categoria excluida com sucesso", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            grid_categorias.DataSource = await _c7CategoriaController.ListarC7Categorias(_usuariologado);
+            await LoadGridCategorias();
         }
         private void Fo_Categorias_FormClosed(object sender, FormClosedEventArgs e)
         {

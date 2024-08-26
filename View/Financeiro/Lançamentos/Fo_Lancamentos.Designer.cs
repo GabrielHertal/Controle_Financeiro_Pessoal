@@ -109,18 +109,18 @@
             grid_lancamentos.AutoGenerateColumns = false;
             grid_lancamentos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             grid_lancamentos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.BottomCenter;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             grid_lancamentos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             grid_lancamentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             grid_lancamentos.Columns.AddRange(new DataGridViewColumn[] { c2LancamentoIdDataGridViewTextBoxColumn, c2LancamentoNomeDataGridViewTextBoxColumn, c2LancamentoValorDataGridViewTextBoxColumn, c2DataLancamentoDataGridViewTextBoxColumn, c2DataPrevPagDataGridViewTextBoxColumn, c2DataPagDataGridViewTextBoxColumn, C2FKC3Nome_Status_Lancamento, c2FKC4NomeMoedaDataGridViewTextBoxColumn, c2FKC5TipoLancamentoDataGridViewTextBoxColumn, c2FKC6NomeContaDataGridViewTextBoxColumn, C2FKC5ID_Tipo_Lancamento, C2FKC4Id_Moeda, C2FKC3Id_Status_Lancamento, C2FKC2ID_Lancamento_Pai });
             grid_lancamentos.DataSource = c2LancamentoDTOBindingSource;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.BottomCenter;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F);
             dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
@@ -131,8 +131,9 @@
             grid_lancamentos.Location = new Point(14, 81);
             grid_lancamentos.Name = "grid_lancamentos";
             grid_lancamentos.ReadOnly = true;
+            grid_lancamentos.RowHeadersVisible = false;
             grid_lancamentos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            grid_lancamentos.Size = new Size(1379, 709);
+            grid_lancamentos.Size = new Size(1380, 710);
             grid_lancamentos.TabIndex = 0;
             grid_lancamentos.CellMouseDoubleClick += grid_lancamentos_CellMouseDoubleClick;
             // 
@@ -142,8 +143,9 @@
             // 
             // c2LancamentoIdDataGridViewTextBoxColumn
             // 
+            c2LancamentoIdDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             c2LancamentoIdDataGridViewTextBoxColumn.DataPropertyName = "C2LancamentoId";
-            c2LancamentoIdDataGridViewTextBoxColumn.FillWeight = 20F;
+            c2LancamentoIdDataGridViewTextBoxColumn.FillWeight = 15F;
             c2LancamentoIdDataGridViewTextBoxColumn.HeaderText = "ID";
             c2LancamentoIdDataGridViewTextBoxColumn.Name = "c2LancamentoIdDataGridViewTextBoxColumn";
             c2LancamentoIdDataGridViewTextBoxColumn.ReadOnly = true;
@@ -158,6 +160,7 @@
             // 
             // c2LancamentoValorDataGridViewTextBoxColumn
             // 
+            c2LancamentoValorDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             c2LancamentoValorDataGridViewTextBoxColumn.DataPropertyName = "C2LancamentoValor";
             c2LancamentoValorDataGridViewTextBoxColumn.FillWeight = 40F;
             c2LancamentoValorDataGridViewTextBoxColumn.HeaderText = "VALOR";
@@ -174,8 +177,9 @@
             // 
             // c2DataPrevPagDataGridViewTextBoxColumn
             // 
+            c2DataPrevPagDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             c2DataPrevPagDataGridViewTextBoxColumn.DataPropertyName = "C2Data_Prev_Pag";
-            c2DataPrevPagDataGridViewTextBoxColumn.FillWeight = 70F;
+            c2DataPrevPagDataGridViewTextBoxColumn.FillWeight = 50F;
             c2DataPrevPagDataGridViewTextBoxColumn.HeaderText = "DATA PREV. PAG.";
             c2DataPrevPagDataGridViewTextBoxColumn.Name = "c2DataPrevPagDataGridViewTextBoxColumn";
             c2DataPrevPagDataGridViewTextBoxColumn.ReadOnly = true;
@@ -207,8 +211,9 @@
             // 
             // c2FKC5TipoLancamentoDataGridViewTextBoxColumn
             // 
+            c2FKC5TipoLancamentoDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             c2FKC5TipoLancamentoDataGridViewTextBoxColumn.DataPropertyName = "C2FKC5Tipo_Lancamento";
-            c2FKC5TipoLancamentoDataGridViewTextBoxColumn.FillWeight = 40F;
+            c2FKC5TipoLancamentoDataGridViewTextBoxColumn.FillWeight = 50F;
             c2FKC5TipoLancamentoDataGridViewTextBoxColumn.HeaderText = "TIPO ";
             c2FKC5TipoLancamentoDataGridViewTextBoxColumn.Name = "c2FKC5TipoLancamentoDataGridViewTextBoxColumn";
             c2FKC5TipoLancamentoDataGridViewTextBoxColumn.ReadOnly = true;

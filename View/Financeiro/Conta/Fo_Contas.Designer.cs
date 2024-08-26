@@ -35,10 +35,10 @@
             btn_adicionar = new Button();
             btn_excluir = new Button();
             grid_contas = new DataGridView();
+            c6ContaDTOBindingSource = new BindingSource(components);
             c6IDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             c6NomeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             c6SaldoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            c6ContaDTOBindingSource = new BindingSource(components);
             panel_contas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)grid_contas).BeginInit();
             ((System.ComponentModel.ISupportInitialize)c6ContaDTOBindingSource).BeginInit();
@@ -112,30 +112,30 @@
             grid_contas.TabIndex = 3;
             grid_contas.CellMouseDoubleClick += grid_recebimentos_CellMouseDoubleClick;
             // 
+            // c6ContaDTOBindingSource
+            // 
+            c6ContaDTOBindingSource.DataSource = typeof(DTO.C6ContaDTO);
+            // 
             // c6IDDataGridViewTextBoxColumn
             // 
             c6IDDataGridViewTextBoxColumn.DataPropertyName = "C6ID";
-            c6IDDataGridViewTextBoxColumn.HeaderText = "C6ID";
+            c6IDDataGridViewTextBoxColumn.HeaderText = "ID";
             c6IDDataGridViewTextBoxColumn.Name = "c6IDDataGridViewTextBoxColumn";
             c6IDDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // c6NomeDataGridViewTextBoxColumn
             // 
             c6NomeDataGridViewTextBoxColumn.DataPropertyName = "C6Nome";
-            c6NomeDataGridViewTextBoxColumn.HeaderText = "C6Nome";
+            c6NomeDataGridViewTextBoxColumn.HeaderText = "NOME";
             c6NomeDataGridViewTextBoxColumn.Name = "c6NomeDataGridViewTextBoxColumn";
             c6NomeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // c6SaldoDataGridViewTextBoxColumn
             // 
             c6SaldoDataGridViewTextBoxColumn.DataPropertyName = "C6Saldo";
-            c6SaldoDataGridViewTextBoxColumn.HeaderText = "C6Saldo";
+            c6SaldoDataGridViewTextBoxColumn.HeaderText = "SALDO";
             c6SaldoDataGridViewTextBoxColumn.Name = "c6SaldoDataGridViewTextBoxColumn";
             c6SaldoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // c6ContaDTOBindingSource
-            // 
-            c6ContaDTOBindingSource.DataSource = typeof(DTO.C6ContaDTO);
             // 
             // Fo_Contas
             // 
@@ -159,9 +159,9 @@
         private Button btn_adicionar;
         private Button btn_excluir;
         private DataGridView grid_contas;
+        private BindingSource c6ContaDTOBindingSource;
         private DataGridViewTextBoxColumn c6IDDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn c6NomeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn c6SaldoDataGridViewTextBoxColumn;
-        private BindingSource c6ContaDTOBindingSource;
     }
 }

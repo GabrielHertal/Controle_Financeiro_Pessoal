@@ -20,10 +20,10 @@ namespace Controle_Financeiro_Pessoal.Controller
             await _Context
                 .SaveChangesAsync();
         }
-        public int VerificarExistenciaCadastro(string email, string senha)
-            => _Context.C1Usuario
+        public async Task<int> VerificarExistenciaCadastro(string email, string senha)
+            => await _Context.C1Usuario
                 .Where(c => c.C1Ativo == true)
-                .Count(u => u.C1Email == email && u.C1Senha == senha);
+                .CountAsync(u => u.C1Email == email && u.C1Senha == senha);
         public async Task <int> SalvarUsuarioConectado(string email, string senha)
         {
              usuariologado = await _Context.C1Usuario

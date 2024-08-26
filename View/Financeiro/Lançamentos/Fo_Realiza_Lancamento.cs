@@ -49,7 +49,7 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro
             cbx_categorias.SelectedValue = _c2lancamentodto.C2FKC7ID_Categoria;
             _valor_original = float.Parse(_c2lancamentodto.C2LancamentoValor);
         }
-        private async void Fo_Realiza_Lancamento_Load(object sender, EventArgs e)
+        private async Task LoadLancamentos()
         {
             cbx_conta.DataSource = await _c6ContaController.PreencheComboBoxC6Conta(_usuariologado);
             cbx_moeda.DataSource = await _c6ContaController.ListarC4Moeda();
@@ -62,6 +62,10 @@ namespace Controle_Financeiro_Pessoal.View.Financeiro
             System.Threading.Thread.Sleep(300);
             __qtd_parcelas = await _c2LancamentoController.QtdParcelasC2Lancamentos_Filho(_id_lancamento);
             cbx_parcelas.SelectedIndex = __qtd_parcelas;
+        }
+        private async void Fo_Realiza_Lancamento_Load(object sender, EventArgs e)
+        {
+            await LoadLancamentos();
         }
         private void btn_cancelar_Click(object sender, EventArgs e)
         {
